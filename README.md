@@ -60,6 +60,10 @@ classDiagram
     }
 ```
 
+Het is misschien wenselijk om zones in een ander (GIS) systeem te beheren.
+
+Te bekijken of [heeftMeerInfo](https://data.vlaanderen.be/doc/applicatieprofiel/slimmeraadpleegomgeving/#Stuk%3AheeftMeerInfo) voldoende is om het Besluit te laten wijzen naar een pagina met meer info over de zones.
+
 ## Periode
 
 ```
