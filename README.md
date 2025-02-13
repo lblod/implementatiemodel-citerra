@@ -90,6 +90,8 @@ classDiagram
 
 ## Extra info
 
+### Motivatie
+
 ```
 <div prefix="besluit: http://data.vlaanderen.be/ns/besluit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/ schema: https://schema.org/">
 De aanvraag dient de aanvraag  
@@ -113,3 +115,9 @@ classDiagram
       label (skos:prefLabel) "Motivatie om de vergunning te verkrijgen."
     }
 ```
+
+### Deelwagen
+
+Voorwaarde vraag deelwagen ja / nee
+
+Indien ja, extra voorwaarde met document
