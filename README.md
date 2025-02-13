@@ -88,6 +88,28 @@ classDiagram
     }
 ```
 
-
 ## Extra info
 
+```
+<div prefix="besluit: http://data.vlaanderen.be/ns/besluit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/ schema: https://schema.org/">
+De aanvraag dient de aanvraag  
+  <div typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/3">
+    <span property="dct:type" resource="https://data.vlaanderen.be/id/concept/voorwaarde/motivatie">te motiveren.</span>
+  </div>
+</div>
+```
+
+```mermaid
+classDiagram
+    voorwaarde_motivatie --> concept_motivatie: type (dct-type)
+    note for voorwaarde_motivatie "URI: https://data.gent.be/id/voorwaarden/3"
+    note for concept_motivatie "URI: https://data.vlaanderen.be/id/concept/voorwaarde/motivatie"
+    class voorwaarde_motivatie {
+      a Voorwaarde (m8g:Requirement)
+      label (dct:description) "Motiveer je aanvraag."
+    }
+    class concept_motivatie {
+      a Concept (skos:Concept)
+      label (skos:prefLabel) "Motivatie om de vergunning te verkrijgen."
+    }
+```
