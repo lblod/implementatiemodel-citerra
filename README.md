@@ -1,26 +1,31 @@
 # OSLO Mobiliteit: Intelligente Toegang - implementatiemodel LBLOD (Citerra project)
 
-De opzet van deze repository is om RDFa voorbeelden te maken hoe het model van OSLO Mobiliteit: Intelligente Toegang geïmplementeerd kan worden in besluiten.
+Deze repository voorziet voorbeelden om voorwaarden voor toegang autoluwe zones semantisch te beschrijven.
 
-De focus ligt op het beschrijven van de voorwaarden van autoluwe zones, zodat deze hergebruikt kunnen worden voor het opbouwen van aanvraagformulieren.
+Deze voorbeelden zijn beschreven in RDFa formaat om besluiten op een machine-leesbare manier te ontsluiten.
+
+Op dit moment ligt de focus op minimale voorbeeldjes om het OSLO model [OSLO Mobiliteit: Intelligente Toegang](https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang) af te toetsen.
+Later kunnen reglementteksten uit de praktijk hieraan toevoegd worden.
 
 ## Vergunningszone
 
 
-Om een autoluwe zone aan te duiden, gebruiken we een naam en geometrie:
+Om een autoluwe zone te beschrijven, gebruiken we de klasse `Zone` en eigenschappen `naam` en `geometrie`.
 
 ```
-<div prefix="besluit: http://data.vlaanderen.be/ns/besluit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/">
-  <div property="prov:generated" typeof="besluit:Besluit" resource="https://data.gent.be/id/besluiten/23.0829.9225.8540">
-    <span property="eli:title" datatype="xsd:string">2023_CBS_08501 - definiëren van 
-    <div property="prov:atLocation" typeof="https://data.vlaanderen.be/ns/mobiliteit#Zone" resource="https://data.gent.be/id/zone/x">
-      <span property="rdfs:label">autoluwezone X te Gent</span>.
+<div prefix="besluit: http://data.vlaanderen.be/ns/besluit# mobiliteit: https://data.vlaanderen.be/ns/mobiliteit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/">
+    <div typeof="mobiliteit:Zone" resource="https://data.gent.be/id/zone/x">
+      <span property="rdfs:label">zone X</span>.
       <div property="locn:geometry" typeof="locn:Geometry" resource="https://data.gent.be/id/zone/x/geometrie/1">
 <span property="geosparql:asWKT" content="<http://www.opengis.net/def/crs/EPSG/0/31370> POINT(126306.58208223493 179948.9735279791)" datatype="geosparql:wktLiteral"></span>
       </div>
     </div>
   </div>
+```
 
+Een voorwaarde met type `zone` kan naar deze zone vervolgens verwijzen:
+
+```
   <div typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/1">
     <span property="dct:type" value="https://data.vlaanderen.be/id/concept/voorwaarde/zone">Zone
     <div property="prov:atLocation" typeof="https://data.vlaanderen.be/ns/mobiliteit#Zone" resource="https://data.gent.be/id/zone/x"> X
@@ -30,19 +35,14 @@ Om een autoluwe zone aan te duiden, gebruiken we een naam en geometrie:
 
 ```mermaid
 classDiagram
-    2023_CBS_08639 --> autoluwe_zone_x: geografischeDekking (prov-atLocation)
     autoluwe_zone_x --> autoluwe_zone_x_geometrie: geometrie (locn-geometry)
     voorwaarde_zone --> concept_zone: type (dct-type)
     voorwaarde_zone --> autoluwe_zone_x: geografischeDekking (prov-atLocation)
-    note for 2023_CBS_08639 "URI: https://data.gent.be/id/besluiten/23.0829.4481.1644"
     note for autoluwe_zone_x "URI: https://data.gent.be/id/zone/x"
     note for autoluwe_zone_x_geometrie "URI: https://data.gent.be/id/zone/x/geometrie/1"
     note for voorwaarde_zone "URI: https://data.gent.be/id/voorwaarden/1"
     note for concept_zone "URI: https://data.vlaanderen.be/id/concept/voorwaarde/zone"
-    class 2023_CBS_08639 {
-      a Besluit (besluit:Besluit)
-      titel (eli:title) "2023_CBS_08639 - definiëren van autoluwezone X te Gent
-    }
+
     class autoluwe_zone_x {
       a Zone (mobiliteit:Zone)
       naam (rdfs:label) "autoluwezone X te Gent"
@@ -60,9 +60,8 @@ classDiagram
     }
 ```
 
-Het is misschien wenselijk om zones in een ander (GIS) systeem te beheren.
-
-Te bekijken of [heeftMeerInfo](https://data.vlaanderen.be/doc/applicatieprofiel/slimmeraadpleegomgeving/#Stuk%3AheeftMeerInfo) voldoende is om het Besluit te laten wijzen naar een pagina met meer info over de zones.
+Het kan wenselijk zijn om zones in een ander (GIS) systeem te beheren.
+Te bekijken of [heeftMeerInfo](https://data.vlaanderen.be/doc/applicatieprofiel/slimmeraadpleegomgeving/#Stuk%3AheeftMeerInfo) voldoende is om het reglement te laten wijzen naar een pagina met meer info over de zones.
 
 ## Periode
 
