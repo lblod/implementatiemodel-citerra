@@ -13,7 +13,7 @@ Later kunnen reglementteksten uit de praktijk hieraan toevoegd worden.
 Om een autoluwe zone te beschrijven, gebruiken we de klasse `Zone` en eigenschappen `naam` en `geometrie`.
 
 ```
-<div prefix="besluit: http://data.vlaanderen.be/ns/besluit# mobiliteit: https://data.vlaanderen.be/ns/mobiliteit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/">
+<div prefix="besluit: http://data.vlaanderen.be/ns/besluit# mobiliteit: https://data.vlaanderen.be/ns/mobiliteit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/ dct: http://purl.org/dc/terms/">
     <div typeof="mobiliteit:Zone" resource="https://data.gent.be/id/zone/x">
       <span property="rdfs:label">zone X</span>.
       <div property="locn:geometry" typeof="locn:Geometry" resource="https://data.gent.be/id/zone/x/geometrie/1">
@@ -68,7 +68,7 @@ Te bekijken of [heeftMeerInfo](https://data.vlaanderen.be/doc/applicatieprofiel/
 Om te beschrijven hoelang een vergunning geldig is, gebruiken we een `Voorwaarde` met type `periode` en eigenschap `duur` (`https://schema.org/duration`). Duur wordt uitgedrukt als een interval volgens iso 8601, bv P1D 1 dag, P12M 12 maanden...	
 
 ```
-<div prefix="besluit: http://data.vlaanderen.be/ns/besluit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/ schema: https://schema.org/">
+<div prefix="besluit: http://data.vlaanderen.be/ns/besluit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/ schema: https://schema.org/ dct: http://purl.org/dc/terms/">
 Deze vergunning is 
   <div typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/2">
     <span property="dct:type" resource="https://data.vlaanderen.be/id/concept/voorwaarde/periode"></span>
@@ -98,7 +98,7 @@ classDiagram
 ### Motivatie
 
 ```
-<div prefix="besluit: http://data.vlaanderen.be/ns/besluit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/ schema: https://schema.org/">
+<div prefix="besluit: http://data.vlaanderen.be/ns/besluit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/ schema: https://schema.org/ dct: http://purl.org/dc/terms/">
 De aanvraag moet   
   <div typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/3">
     <span property="dct:type" resource="https://data.vlaanderen.be/id/concept/voorwaarde/motivatie">gemotiveerd</span>
@@ -114,7 +114,7 @@ classDiagram
     note for concept_motivatie "URI: https://data.vlaanderen.be/id/concept/voorwaarde/motivatie"
     class voorwaarde_motivatie {
       a Voorwaarde (m8g:Requirement)
-      label (dct:description) "Motiveer je aanvraag."
+      beschrijving (dct:description) "Motiveer je aanvraag."
     }
     class concept_motivatie {
       a Concept (skos:Concept)
@@ -124,36 +124,113 @@ classDiagram
 
 ### Deelwagen
 
-Voorwaarde om te vragen of deelwagen gebruikt zal worden.
+Voorwaarde dat het gebruik van een deelwagen nagaat.
+
+Is een collectie van voorwaarden waarbij gekozen moet worden (OR) tussen volgende voorwaarden:
+* Voorwaarde: Gebruikt geen deelwagen
+* Terug een collectie van voorwaarden (AND):
+  * Gebruikt wel een deelwagen
+  * Bewijs deelwagen
 
 ```
-<div prefix="besluit: http://data.vlaanderen.be/ns/besluit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/ schema: https://schema.org/">
-De aanvrager moet aangeven of een
-  <div typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/4">
-    <span property="dct:type" resource="https://data.vlaanderen.be/id/concept/voorwaarde/isDeelwagen">deelwagen</span>
-  </div>
-gebruikt wordt.
+<div prefix="besluit: http://data.vlaanderen.be/ns/besluit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/ mit: https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang# schema: https://schema.org/ dct: http://purl.org/dc/terms/">
+De aanvrager moet aangeven
+<div typeof="mit:Voorwaardecollectie m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/4">
+    <span property="dct:description">
+        of een deelwagen gebruikt zal worden.
+        <span property="mit:operatie" value="https://data.vlaanderen.be/id/concept/logischeOperatie/OR"></span>
+        <div property="m8g:hasRequirement" typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/5">
+            <span property="dct:type" resource="https://data.vlaanderen.be/id/concept/voorwaarde/gebruiktGeenDeelwagen"></span>
+            <span property="dct:description>Ofwel wordt er geen deelvoertuig gebruikt.</span>
+        </div>
+        <div property="m8g:hasRequirement" typeof="mit:Voorwaardecollectie m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/6">
+            <span property="mit:operatie" value="https://data.vlaanderen.be/id/concept/logischeOperatie/AND"></span>
+            <div property="m8g:hasRequirement" typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/7">
+                <span property="dct:type" resource="https://data.vlaanderen.be/id/concept/voorwaarde/gebruiktDeelwagen"></span>
+                <span property="dct:description>Ofwel wordt er wel een deelvoertuig gebruikt </span>
+            </div>
+            <div property="m8g:hasRequirement" typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/8">
+                <span property="dct:type" resource="https://data.vlaanderen.be/id/concept/voorwaarde/deelwagenbewijs"></span>
+                <span property="dct:description>en wordt aangetoond met een document dat de aanvrager deze deelwagen gebruikt.</span>
+                <div property="m8g:hasEvidenceTypeList" typeof="m8g:EvidenceTypeList" resource="https://data.gent.be/id/bewijstypelijst/1">
+                    <div property="m8g:specifiesEvidenceType" typeof="m8g:EvidenceType" resource="https://data.gent.be/id/bewijstype/1">
+                        <span property="m8g:evidenceTypeClassification" value="https://data.vlaanderen.be/id/concept/bewijstypeclassificatie/deelwagenbewijs"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </span>
 </div>
 ```
 
 ```mermaid
 classDiagram
-    voorwaarde_isDeelwagen --> concept_isDeelwagen: type (dct-type)
-    note for voorwaarde_isDeelwagen "URI: https://data.gent.be/id/voorwaarden/4"
-    note for concept_isDeelwagen "URI: https://data.vlaanderen.be/id/concept/voorwaarde/isDeelwagen"
-    class voorwaarde_isDeelwagen {
-      a Voorwaarde (m8g:Requirement)
-      label (dct:description) "Wil je deelvoertuigen gebruiken voor deze vergunning?"
+    voorwaardecollectie_deelwagen --> concept_deelwagen: type (dct-type)
+    voorwaardecollectie_deelwagen --> voorwaarde_gebruiktGeenDeelwagen: heeftVoorwaarde (m8g-hasRequirement)
+    note for voorwaardecollectie_deelwagen "URI: https://data.gent.be/id/voorwaarden/4"
+    note for concept_deelwagen "URI: https://data.vlaanderen.be/id/concept/voorwaarde/deelwagen"
+    class voorwaardecollectie_deelwagen {
+      a Voorwaardecollectie (mit:Voorwaardecollectie)
+      beschrijving (dct:description) "of een deelwagen gebruikt zal worden. Ofwel wordt er geen deelvoertuig gebruikt. Ofwel wordt er wel een deelvoertuig gebruikt en wordt aangetoond met een document dat de aanvrager deze deelwagen gebruikt."
+      operatie (mit:operatie) "OR"
     }
-    class concept_isDeelwagen {
+    class concept_deelwagen {
       a Concept (skos:Concept)
-      label (skos:prefLabel) "Aangeven of een deelwagen gebruikt wordt."
+      label (skos:prefLabel) "Al dan niet gebruik van deelwagen."
+    }
+    note for voorwaarde_gebruiktGeenDeelwagen "URI: https://data.gent.be/id/voorwaarden/5"
+    voorwaarde_gebruiktGeenDeelwagen --> concept_gebruiktGeenDeelwagen: type (dct-type)
+    class voorwaarde_gebruiktGeenDeelwagen {
+        a Voorwaarde (m8g:Requirement)
+        beschrijving (dct:description) "Ofwel wordt er geen deelvoertuig gebruikt."
+    }
+    class concept_gebruiktGeenDeelwagen {
+      a Concept (skos:Concept)
+      label (skos:prefLabel) "Aanvrager gebruikt geen deelwagen."
+    }
+
+    note for voorwaardecollectie_gebruiktDeelwagen "URI: https://data.gent.be/id/voorwaarden/6"
+    class voorwaardecollectie_gebruiktDeelwagen {
+      a Voorwaardecollectie (mit:Voorwaardecollectie)
+      beschrijving (dct:description) "Ofwel wordt er wel een deelvoertuig gebruikt en wordt aangetoond met een document dat de aanvrager deze deelwagen gebruikt."
+      operatie (mit:operatie) "AND"
+    }
+    voorwaardecollectie_gebruiktDeelwagen --> voorwaarde_gebruiktDeelwagen: heeftVoorwaarde (m8g-hasRequirement)
+
+    note for voorwaarde_gebruiktDeelwagen "URI: https://data.gent.be/id/voorwaarden/7"
+    voorwaarde_gebruiktDeelwagen --> concept_gebruiktDeelwagen: type (dct-type)
+    class voorwaarde_gebruiktDeelwagen {
+        a Voorwaarde (m8g:Requirement)
+        beschrijving (dct:description) "Ofwel wordt er wel een deelvoertuig gebruikt "
+    }
+    class concept_gebruiktDeelwagen {
+      a Concept (skos:Concept)
+      label (skos:prefLabel) "Aanvrager gebruikt deelwagen."
+    }
+
+    voorwaardecollectie_gebruiktDeelwagen --> voorwaarde_deelwagenbewijs: heeftVoorwaarde (m8g-hasRequirement)
+
+    note for voorwaarde_deelwagenbewijs "URI: https://data.gent.be/id/voorwaarden/8"
+    voorwaarde_deelwagenbewijs --> concept_deelwagenbewijs: type (dct-type)
+    class voorwaarde_deelwagenbewijs {
+        a Voorwaarde (m8g:Requirement)
+        beschrijving (dct:description) "wordt aangetoond met een document dat de aanvrager deze deelwagen gebruikt."
+    }
+    class concept_deelwagenbewijs {
+      a Concept (skos:Concept)
+      label (skos:prefLabel) "Aanvrager toont gebruik van deelwagen aan met document."
+    }
+    voorwaarde_deelwagenbewijs --> bewijstypelijst_deelwagenbewijs: heeftBewijstypelijst (m8g:hasEvidenceTypeList)
+    note for bewijstypelijst_deelwagenbewijs "URI: https://data.gent.be/id/bewijsttypelijst/1"
+    class bewijstypelijst_deelwagenbewijs {
+        a Bewijstypelijst (m8g:EvidenceTypeList)
+    }
+    bewijstypelijst_deelwagenbewijs --> bewijstype_deelwagen: specifieertBewijstype (m8g:specifiesEvidenceType)
+    note for bewijstype_deelwagen: "URI: https://data.gent.be/id/bewijstype/1"
+    class bewijstype_deelwagen {
+        a Bewijstype (m8g:EvidenceType)
     }
 ```
 
-### Deelwagen bewijs
-
-Indien deelwagen gebruikt wordt, dient dit aangetoond te worden met een document.
-
-
-
+TODO model:
+* type niet verplichten op Voorwaardecollectie
