@@ -99,10 +99,11 @@ classDiagram
 
 ```
 <div prefix="besluit: http://data.vlaanderen.be/ns/besluit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/ schema: https://schema.org/">
-De aanvraag dient de aanvraag  
+De aanvraag moet   
   <div typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/3">
-    <span property="dct:type" resource="https://data.vlaanderen.be/id/concept/voorwaarde/motivatie">te motiveren.</span>
+    <span property="dct:type" resource="https://data.vlaanderen.be/id/concept/voorwaarde/motivatie">gemotiveerd</span>
   </div>
+worden.
 </div>
 ```
 
@@ -123,6 +124,36 @@ classDiagram
 
 ### Deelwagen
 
-Voorwaarde vraag deelwagen ja / nee
+Voorwaarde om te vragen of deelwagen gebruikt zal worden.
 
-Indien ja, extra voorwaarde met document
+```
+<div prefix="besluit: http://data.vlaanderen.be/ns/besluit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/ schema: https://schema.org/">
+De aanvrager moet aangeven of een
+  <div typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/4">
+    <span property="dct:type" resource="https://data.vlaanderen.be/id/concept/voorwaarde/isDeelwagen">deelwagen</span>
+  </div>
+gebruikt wordt.
+</div>
+```
+
+```mermaid
+classDiagram
+    voorwaarde_isDeelwagen --> concept_isDeelwagen: type (dct-type)
+    note for voorwaarde_isDeelwagen "URI: https://data.gent.be/id/voorwaarden/4"
+    note for concept_isDeelwagen "URI: https://data.vlaanderen.be/id/concept/voorwaarde/isDeelwagen"
+    class voorwaarde_isDeelwagen {
+      a Voorwaarde (m8g:Requirement)
+      label (dct:description) "Wil je deelvoertuigen gebruiken voor deze vergunning?"
+    }
+    class concept_isDeelwagen {
+      a Concept (skos:Concept)
+      label (skos:prefLabel) "Aangeven of een deelwagen gebruikt wordt."
+    }
+```
+
+### Deelwagen bewijs
+
+Indien deelwagen gebruikt wordt, dient dit aangetoond te worden met een document.
+
+
+
