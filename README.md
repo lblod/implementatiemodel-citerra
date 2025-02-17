@@ -195,8 +195,9 @@ classDiagram
       beschrijving (dct:description) "Ofwel wordt er wel een deelvoertuig gebruikt en wordt aangetoond met een document dat de aanvrager deze deelwagen gebruikt."
       operatie (mit:operatie) "AND"
     }
-    voorwaardecollectie_gebruiktDeelwagen --> voorwaarde_gebruiktDeelwagen: heeftVoorwaarde (m8g-hasRequirement)
+    voorwaardecollectie_deelwagen --> voorwaardecollectie_gebruiktDeelwagen: heeftVoorwaarde (m8g-hasRequirement)
 
+    voorwaardecollectie_gebruiktDeelwagen --> voorwaarde_gebruiktDeelwagen: heeftVoorwaarde (m8g-hasRequirement)
     note for voorwaarde_gebruiktDeelwagen "URI: https://data.gent.be/id/voorwaarden/7"
     voorwaarde_gebruiktDeelwagen --> concept_gebruiktDeelwagen: type (dct-type)
     class voorwaarde_gebruiktDeelwagen {
@@ -220,13 +221,13 @@ classDiagram
       a Concept (skos:Concept)
       label (skos:prefLabel) "Aanvrager toont gebruik van deelwagen aan met document."
     }
-    voorwaarde_deelwagenbewijs --> bewijstypelijst_deelwagenbewijs: heeftBewijstypelijst (m8g:hasEvidenceTypeList)
+    voorwaarde_deelwagenbewijs --> bewijstypelijst_deelwagenbewijs: heeftBewijstypelijst (m8g-hasEvidenceTypeList)
     note for bewijstypelijst_deelwagenbewijs "URI: https://data.gent.be/id/bewijsttypelijst/1"
     class bewijstypelijst_deelwagenbewijs {
         a Bewijstypelijst (m8g:EvidenceTypeList)
     }
-    bewijstypelijst_deelwagenbewijs --> bewijstype_deelwagen: specifieertBewijstype (m8g:specifiesEvidenceType)
-    note for bewijstype_deelwagen: "URI: https://data.gent.be/id/bewijstype/1"
+    bewijstypelijst_deelwagenbewijs --> bewijstype_deelwagen: specifieertBewijstype (m8g-specifiesEvidenceType)
+    note for bewijstype_deelwagen "URI: https://data.gent.be/id/bewijstype/1"
     class bewijstype_deelwagen {
         a Bewijstype (m8g:EvidenceType)
     }
