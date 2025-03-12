@@ -38,10 +38,10 @@ classDiagram
     autoluwe_zone_x --> autoluwe_zone_x_geometrie: geometrie (locn-geometry)
     voorwaarde_zone --> concept_zone: type (dct-type)
     voorwaarde_zone --> autoluwe_zone_x: geografischeDekking (prov-atLocation)
-    note for autoluwe_zone_x "URI: https://data.gent.be/id/zone/x"
-    note for autoluwe_zone_x_geometrie "URI: https://data.gent.be/id/zone/x/geometrie/1"
-    note for voorwaarde_zone "URI: https://data.gent.be/id/voorwaarden/1"
-    note for concept_zone "URI: https://data.vlaanderen.be/id/concept/voorwaarde/zone"
+    note for autoluwe_zone_x "URI: https:\/\/data.gent.be\/id\/zone\/x"
+    note for autoluwe_zone_x_geometrie "URI: https:\/\/data.gent.be\/id\/zone\/x\/geometrie\/1"
+    note for voorwaarde_zone "URI: https:\/\/data.gent.be\/id\/voorwaarden\/1"
+    note for concept_zone "URI: https:\/\/data.vlaanderen.be\/id\/concept\/voorwaarde\/zone"
 
     class autoluwe_zone_x {
       a Zone (mobiliteit:Zone)
@@ -81,8 +81,8 @@ Deze vergunning is
 ```mermaid
 classDiagram
     voorwaarde_periode --> concept_periode: type (dct-type)
-    note for voorwaarde_periode "URI: https://data.gent.be/id/voorwaarden/2"
-    note for concept_periode "URI: https://data.vlaanderen.be/id/concept/voorwaarde/periode"
+    note for voorwaarde_periode "URI: https:\/\/data.gent.be\/id\/voorwaarden\/2"
+    note for concept_periode "URI: https:\/\/data.vlaanderen.be\/id\/concept\/voorwaarde\/periode"
     class voorwaarde_periode {
       a Voorwaarde (m8g:Requirement)
       duur (schema:duration) "P12M"
@@ -110,8 +110,8 @@ worden.
 ```mermaid
 classDiagram
     voorwaarde_motivatie --> concept_motivatie: type (dct-type)
-    note for voorwaarde_motivatie "URI: https://data.gent.be/id/voorwaarden/3"
-    note for concept_motivatie "URI: https://data.vlaanderen.be/id/concept/voorwaarde/motivatie"
+    note for voorwaarde_motivatie "URI: https:\/\/data.gent.be\/id\/voorwaarden\/3"
+    note for concept_motivatie "URI: https:\/\/data.vlaanderen.be\/id\/concept\/voorwaarde\/motivatie"
     class voorwaarde_motivatie {
       a Voorwaarde (m8g:Requirement)
       beschrijving (dct:description) "Motiveer je aanvraag."
@@ -167,8 +167,8 @@ De aanvrager moet aangeven
 classDiagram
     voorwaardecollectie_deelwagen --> concept_deelwagen: type (dct-type)
     voorwaardecollectie_deelwagen --> voorwaarde_gebruiktGeenDeelwagen: heeftVoorwaarde (m8g-hasRequirement)
-    note for voorwaardecollectie_deelwagen "URI: https://data.gent.be/id/voorwaarden/4"
-    note for concept_deelwagen "URI: https://data.vlaanderen.be/id/concept/voorwaarde/deelwagen"
+    note for voorwaardecollectie_deelwagen "URI: https:\/\/data.gent.be\/id\/voorwaarden\/4"
+    note for concept_deelwagen "URI: https:\/\/data.vlaanderen.be\/id\/concept\/voorwaarde\/deelwagen"
     class voorwaardecollectie_deelwagen {
       a Voorwaardecollectie (mit:Voorwaardecollectie)
       beschrijving (dct:description) "of een deelwagen gebruikt zal worden. Ofwel wordt er geen deelvoertuig gebruikt. Ofwel wordt er wel een deelvoertuig gebruikt en wordt aangetoond met een document dat de aanvrager deze deelwagen gebruikt."
@@ -178,7 +178,7 @@ classDiagram
       a Concept (skos:Concept)
       label (skos:prefLabel) "Al dan niet gebruik van deelwagen."
     }
-    note for voorwaarde_gebruiktGeenDeelwagen "URI: https://data.gent.be/id/voorwaarden/5"
+    note for voorwaarde_gebruiktGeenDeelwagen "URI: https:\/\/data.gent.be\/id\/voorwaarden\/5"
     voorwaarde_gebruiktGeenDeelwagen --> concept_gebruiktGeenDeelwagen: type (dct-type)
     class voorwaarde_gebruiktGeenDeelwagen {
         a Voorwaarde (m8g:Requirement)
@@ -189,7 +189,7 @@ classDiagram
       label (skos:prefLabel) "Aanvrager gebruikt geen deelwagen."
     }
 
-    note for voorwaardecollectie_gebruiktDeelwagen "URI: https://data.gent.be/id/voorwaarden/6"
+    note for voorwaardecollectie_gebruiktDeelwagen "URI: https:\/\/data.gent.be\/id\/voorwaarden\/6"
     class voorwaardecollectie_gebruiktDeelwagen {
       a Voorwaardecollectie (mit:Voorwaardecollectie)
       beschrijving (dct:description) "Ofwel wordt er wel een deelvoertuig gebruikt en wordt aangetoond met een document dat de aanvrager deze deelwagen gebruikt."
@@ -198,7 +198,7 @@ classDiagram
     voorwaardecollectie_deelwagen --> voorwaardecollectie_gebruiktDeelwagen: heeftVoorwaarde (m8g-hasRequirement)
 
     voorwaardecollectie_gebruiktDeelwagen --> voorwaarde_gebruiktDeelwagen: heeftVoorwaarde (m8g-hasRequirement)
-    note for voorwaarde_gebruiktDeelwagen "URI: https://data.gent.be/id/voorwaarden/7"
+    note for voorwaarde_gebruiktDeelwagen "URI: https:\/\/data.gent.be\/id\/voorwaarden\/7"
     voorwaarde_gebruiktDeelwagen --> concept_gebruiktDeelwagen: type (dct-type)
     class voorwaarde_gebruiktDeelwagen {
         a Voorwaarde (m8g:Requirement)
@@ -211,7 +211,7 @@ classDiagram
 
     voorwaardecollectie_gebruiktDeelwagen --> voorwaarde_deelwagenbewijs: heeftVoorwaarde (m8g-hasRequirement)
 
-    note for voorwaarde_deelwagenbewijs "URI: https://data.gent.be/id/voorwaarden/8"
+    note for voorwaarde_deelwagenbewijs "URI: https:\/\/data.gent.be\/id\/voorwaarden\/8"
     voorwaarde_deelwagenbewijs --> concept_deelwagenbewijs: type (dct-type)
     class voorwaarde_deelwagenbewijs {
         a Voorwaarde (m8g:Requirement)
@@ -222,12 +222,12 @@ classDiagram
       label (skos:prefLabel) "Aanvrager toont gebruik van deelwagen aan met document."
     }
     voorwaarde_deelwagenbewijs --> bewijstypelijst_deelwagenbewijs: heeftBewijstypelijst (m8g-hasEvidenceTypeList)
-    note for bewijstypelijst_deelwagenbewijs "URI: https://data.gent.be/id/bewijsttypelijst/1"
+    note for bewijstypelijst_deelwagenbewijs "URI: https:\/\/data.gent.be\/id\/bewijsttypelijst\/1"
     class bewijstypelijst_deelwagenbewijs {
         a Bewijstypelijst (m8g:EvidenceTypeList)
     }
     bewijstypelijst_deelwagenbewijs --> bewijstype_deelwagen: specifieertBewijstype (m8g-specifiesEvidenceType)
-    note for bewijstype_deelwagen "URI: https://data.gent.be/id/bewijstype/1"
+    note for bewijstype_deelwagen "URI: https:\/\/data.gent.be\/id\/bewijstype\/1"
     class bewijstype_deelwagen {
         a Bewijstype (m8g:EvidenceType)
     }
