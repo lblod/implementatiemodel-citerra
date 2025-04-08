@@ -7,6 +7,35 @@ Deze voorbeelden zijn beschreven in RDFa formaat om besluiten op een machine-lee
 Op dit moment ligt de focus op minimale voorbeeldjes om het OSLO model [OSLO Mobiliteit: Intelligente Toegang](https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang) af te toetsen.
 Later kunnen reglementteksten uit de praktijk hieraan toevoegd worden.
 
+# Nieuwe aanpak
+
+In deze nieuwe aanpak wordt er vanuit 2 insteken vertrokken:
+- welke informatie (query) moet een formulier kunnen opvragen om het formulier te kunnen opbouwen
+- hoe kunnen we het reglement annoteren op zodanige manier dat de originele opbouw van de tekst behouden blijft (geen datamodel push, wat in de oude aanpak onderaan wel het geval is met AND/OR constructies)
+  
+## Vergunning autoluwe zone (publieke dienstverlening)
+
+* In welke steden zijn er autoluwe zones waarbij vergunning aanvraagd moet worden?
+
+## Vergunningszone
+
+* Welke zones hebben een vergunning nodig?
+
+## Algemene voorwaarden
+
+* Welke voorwaarden (en evt. bijhorende bewijsstukken) zijn van toepassing?
+
+## Doelgroep
+
+* Welke doelgroepen komen in aanmerking voor een vergunning?
+* Welke specifieke voorwaarden zijn er?
+
+## Periode 
+
+* Voor hoelang kan ik een vergunning aanvragen?
+
+# Oude aanpak
+
 ## Vergunningszone
 
 
