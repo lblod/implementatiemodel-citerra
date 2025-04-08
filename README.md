@@ -7,15 +7,62 @@ Deze voorbeelden zijn beschreven in RDFa formaat om besluiten op een machine-lee
 Op dit moment ligt de focus op minimale voorbeeldjes om het OSLO model [OSLO Mobiliteit: Intelligente Toegang](https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang) af te toetsen.
 Later kunnen reglementteksten uit de praktijk hieraan toevoegd worden.
 
+## Vergunning autoluwe zone (publieke dienstverlening)
+
+* In welke steden wordt een dienstverlening aangeboden om een vergunning voor autoluwe zone te verkrijgen?
+
+```
+prefix cpsv: <http://purl.org/vocab/cpsv#>
+prefix m8g: <http://data.europa.eu/m8g/>
+prefix mit: <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#>
+
+select ?bestuurseenheid ?dienstverlening
+where {
+  ?dienstverlening a cpsv:PublicService ;
+                  m8g:hasCompetentAuthority ?bestuurseenheid ;
+                  mit:heeftOutputtype <http://data.vlaanderen.be/id/concept/PubliekeDienstverleningOutputCode/5ab0e9b8a3b2ca7c5e00001b> .
+}
+```
+TODO: codelijst aanmaken met output code "vergunning autoluwe zone"
+
+## Definitie vergunningszone
+
+* Wat is de naam en geometrie van een zone?
+
+Om een autoluwe zone te beschrijven, gebruiken we de klasse `Zone` en eigenschappen `naam` en `geometrie`.
+
+```
+<div prefix="besluit: http://data.vlaanderen.be/ns/besluit# mobiliteit: https://data.vlaanderen.be/ns/mobiliteit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/ dct: http://purl.org/dc/terms/">
+    <div typeof="mobiliteit:Zone" resource="https://data.gent.be/id/zone/x">
+
+    1.	<span property="rdfs:label">Autoluw gebied 1</span>:
+         <div property="locn:geometry" typeof="locn:Geometry" resource="https://data.gent.be/id/zone/x/geometrie/1">
+          <span property="geosparql:asWKT" content="<http://www.opengis.net/def/crs/EPSG/0/31370> POINT(126306.58208223493 179948.9735279791)" datatype="geosparql:wktLiteral"></span>
+        </div>
+    •	Diestsestraat, tussen Margarethaplein en huisnummer 188/209 en tussen Vanden Tymplestraat en R23; 
+    •	Jodenstraat; 
+    •	Leopold Vanderkelenstraat, tussen de Diestsestraat en de Bondgenotenlaan; 
+    •	Puttegang; 
+    •	Sint-Maartenstraat, tussen de Diestsestraat en parking Sint-Maartensdal (huisnummers 1, 1A en 2 - 18); 
+    •	Vaartstraat, tussen de Diestsestraat en parking Gerechtsgebouw (huisnummer 7).
+    </div>
+</div>
+```
+
+TODO: straten annoteren
+
 # Nieuwe aanpak
 
 In deze nieuwe aanpak wordt er vanuit 2 insteken vertrokken:
 - welke informatie (query) moet een formulier kunnen opvragen om het formulier te kunnen opbouwen
 - hoe kunnen we het reglement annoteren op zodanige manier dat de originele opbouw van de tekst behouden blijft (geen datamodel push, wat in de oude aanpak onderaan wel het geval is met AND/OR constructies)
   
-## Vergunning autoluwe zone (publieke dienstverlening)
+## Op welke zones is de dienstverlening van toepassing?
 
-* In welke steden zijn er autoluwe zones waarbij vergunning aanvraagd moet worden?
+In een reglement worden zones typisch bovenaan eenmalig gedefinieerd. 
+Deze zones zijn dan impliciet van toepassing bij de beschrijving van de vergunningen.
+
+
 
 ## Vergunningszone
 
@@ -37,7 +84,6 @@ In deze nieuwe aanpak wordt er vanuit 2 insteken vertrokken:
 # Oude aanpak
 
 ## Vergunningszone
-
 
 Om een autoluwe zone te beschrijven, gebruiken we de klasse `Zone` en eigenschappen `naam` en `geometrie`.
 
