@@ -1,4 +1,4 @@
-# OSLO Mobiliteit: Intelligente Toegang - implementatiemodel LBLOD (Citerra project)
+![image](https://github.com/user-attachments/assets/9ec73684-b97a-4da3-b924-0d63871982f9)# OSLO Mobiliteit: Intelligente Toegang - implementatiemodel LBLOD (Citerra project)
 
 Deze repository voorziet voorbeelden om voorwaarden voor toegang autoluwe zones semantisch te beschrijven.
 
@@ -59,8 +59,45 @@ In deze nieuwe aanpak wordt er vanuit 2 insteken vertrokken:
   
 ## Op welke zones is de dienstverlening van toepassing?
 
-In een reglement worden zones typisch bovenaan eenmalig gedefinieerd. 
-Deze zones zijn dan impliciet van toepassing bij de beschrijving van de vergunningen.
+Zones kunnen op twee manieren gekoppeld worden aan de dienstverlening (vergunning).
+Enerzijds impliciet wanneer deze eenmalig bovenaan het reglement (of in bijlage) wordt beschreven, anderzijds expliciet de zones op te lijsten in de beschrijving van de dienstverlening.
+
+### Impliciet
+
+In een reglement worden zones typisch bovenaan eenmalig gedefinieerd, zoals definities.
+Deze zones zijn dan impliciet van toepassing bij de beschrijving van de dienstverlening.
+Om de zones van de dienstverlening terug te vinden, gebruiken we dus het besluit zelf waarin deze vermeld staan.
+
+```
+<head>
+    <meta charset="utf-8">
+    <title>REGLEMENT BETREFFENDE DE TOEGANG TOT HET VOETGANGERSGEBIED</title>
+</head>
+<body>
+
+  <div vocab="http://data.vlaanderen.be/ns/besluit#" prefix="lblod: http://data.lblod.info/vocabularies/lblod/ eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# mandaat: http://data.vlaanderen.be/ns/mandaat# besluit: http://data.vlaanderen.be/ns/besluit# generiek: http://data.vlaanderen.be/ns/generiek# person: http://www.w3.org/ns/person# persoon: http://data.vlaanderen.be/ns/persoon# dct: http://purl.org/dc/terms/ skos: http://www.w3.org/2004/02/skos/core# org: http://www.w3.org/ns/org# foaf: http://xmlns.com/foaf/0.1/ ext: http://mu.semte.ch/vocabularies/ext/ besluittype: https://data.vlaanderen.be/id/concept/BesluitType/ elod: http://linkedeconomy.org/ontology# lblodBesluit: http://lblod.data.gift/vocabularies/besluit/ mobiliteit: https://data.vlaanderen.be/ns/mobiliteit#">
+
+<div typeof="foaf:Document https://data.vlaanderen.be/id/concept/BesluitType/67378dd0-5413-474b-8996-d992ef81637a"
+          resource="http://een.domein.van.leuven.be/leuven/a361ed84-4c47-4ee7-b2f9-2411a15d56ff-6">
+          <div resource="http://een.domein.van.leuven.be/reglement/a361ed84-4c47-4ee7-b2f9-2411a15d56ff-6">
+            <p>
+Volgende straten worden voorzien van een verkeersbord F103, al dan niet met een onderbord dat de wettelijke uitzonderingen bepaalt:
+            </p>
+    <div resource="https://data.leuven.be/id/zone/x1"
+      typeof="mobiliteit:Zone"
+      property="prov:atLocation">
+
+      <p>
+        1.	Stadsdeel blauw: 
+      </p>
+
+    </div>  
+  </div>
+</body>
+```
+
+### Expliciet
+
 
 
 
