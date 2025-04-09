@@ -46,6 +46,8 @@ where {
 }
 ```
 
+TODO: type toevoegen aan Zone om aan te duiden dat het een autoluwe zone is
+
 Om een autoluwe zone te beschrijven, gebruiken we de klasse `Zone` en eigenschappen `naam` en `geometrie`.
 
 ```
@@ -73,8 +75,27 @@ TODO: straten annoteren
 In deze nieuwe aanpak wordt er vanuit 2 insteken vertrokken:
 - welke informatie (query) moet een formulier kunnen opvragen om het formulier te kunnen opbouwen
 - hoe kunnen we het reglement annoteren op zodanige manier dat de originele opbouw van de tekst behouden blijft (geen datamodel push, wat in de oude aanpak onderaan wel het geval is met AND/OR constructies)
-  
-## In welke zones is de dienstverlening van toepassing?
+
+## Vergunningszone
+
+* In welke zones is de dienstverlening van toepassing?
+
+```
+prefix mobiliteit: <https://data.vlaanderen.be/ns/mobiliteit#>
+prefix locn: <http://www.w3.org/ns/locn#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix geosparql: <http://www.opengis.net/ont/geosparql#>
+
+select ?zone ?zoneLabel ?wkt
+where {
+  ?besluit a foaf:Document ;
+           prov:atLocation ?zone ;
+           sro:bekrachtigt ?dienstverlening .
+
+  ?zone a mobiliteit:Zone .
+}
+```
+TODO type aan zone autoluw
 
 Zones kunnen op twee manieren gekoppeld worden aan de dienstverlening (vergunning).
 Enerzijds impliciet wanneer deze eenmalig bovenaan het reglement (of in bijlage) wordt beschreven, anderzijds expliciet wanneer de zones opgelijst staan in het artikel/hoofdstuk van de dienstverlening.
