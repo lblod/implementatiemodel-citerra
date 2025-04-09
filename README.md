@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/9ec73684-b97a-4da3-b924-0d63871982f9)# OSLO Mobiliteit: Intelligente Toegang - implementatiemodel LBLOD (Citerra project)
+# OSLO Mobiliteit: Intelligente Toegang - implementatiemodel LBLOD (Citerra project)
 
 Deze repository voorziet voorbeelden om voorwaarden voor toegang autoluwe zones semantisch te beschrijven.
 
@@ -85,12 +85,16 @@ prefix mobiliteit: <https://data.vlaanderen.be/ns/mobiliteit#>
 prefix locn: <http://www.w3.org/ns/locn#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix geosparql: <http://www.opengis.net/ont/geosparql#>
+prefix sro: <	https://data.vlaanderen.be/ns/slimmeraadpleegomgeving#>
 
 select ?zone ?zoneLabel ?wkt
 where {
-  ?besluit a foaf:Document ;
-           prov:atLocation ?zone ;
-           sro:bekrachtigt ?dienstverlening .
+  ?reglement a foaf:Document ;
+           prov:atLocation ?zone .
+
+  ?besluit a besluit:Besluit ;
+          sro:isGerelateerdAan ?reglement ;
+          sro:bekrachtigt ?dienstverlening .
 
   ?zone a mobiliteit:Zone .
 }
