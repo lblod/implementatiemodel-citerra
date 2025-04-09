@@ -145,7 +145,14 @@ Volgende straten worden voorzien van een verkeersbord F103, al dan niet met een 
 
 ### Expliciet
 
+Wanneer de zone expliciet benoemd wordt bij de dienstverlening, beschrijven we de zone als een voorwaarde met type `zone` en een relatie naar een Zone-object:
 
+```
+  <div typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/1">
+    <span property="dct:type" value="https://data.vlaanderen.be/id/concept/voorwaarde/zone">Zone
+    <div property="prov:atLocation" typeof="https://data.vlaanderen.be/ns/mobiliteit#Zone" resource="https://data.gent.be/id/zone/x"> X
+  </div>
+</div>
 
 
 ## Vergunningszone
