@@ -153,7 +153,7 @@ Wanneer de zone expliciet benoemd wordt bij de dienstverlening, beschrijven we d
     <div property="prov:atLocation" typeof="https://data.vlaanderen.be/ns/mobiliteit#Zone" resource="https://data.gent.be/id/zone/x"> X
   </div>
 </div>
-
+```
 
 ## Vergunningszone
 
