@@ -28,6 +28,23 @@ TODO: codelijst aanmaken met output code "vergunning autoluwe zone"
 ## Definitie vergunningszone
 
 * Wat is de naam en geometrie van een zone?
+* Welke straten zijn gekoppeld met een zone?
+
+```
+prefix mobiliteit: <https://data.vlaanderen.be/ns/mobiliteit#>
+prefix locn: <http://www.w3.org/ns/locn#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix geosparql: <http://www.opengis.net/ont/geosparql#>
+
+select ?zone ?zoneLabel ?wkt
+where {
+  ?zone a mobiliteit:Zone ;
+      locn:geometry ?geometrie ;
+      rdfs:label ?zonelabel .
+
+  ?geometrie geosparql:asWKT ?wkt .
+}
+```
 
 Om een autoluwe zone te beschrijven, gebruiken we de klasse `Zone` en eigenschappen `naam` en `geometrie`.
 
@@ -57,10 +74,10 @@ In deze nieuwe aanpak wordt er vanuit 2 insteken vertrokken:
 - welke informatie (query) moet een formulier kunnen opvragen om het formulier te kunnen opbouwen
 - hoe kunnen we het reglement annoteren op zodanige manier dat de originele opbouw van de tekst behouden blijft (geen datamodel push, wat in de oude aanpak onderaan wel het geval is met AND/OR constructies)
   
-## Op welke zones is de dienstverlening van toepassing?
+## In welke zones is de dienstverlening van toepassing?
 
 Zones kunnen op twee manieren gekoppeld worden aan de dienstverlening (vergunning).
-Enerzijds impliciet wanneer deze eenmalig bovenaan het reglement (of in bijlage) wordt beschreven, anderzijds expliciet de zones op te lijsten in de beschrijving van de dienstverlening.
+Enerzijds impliciet wanneer deze eenmalig bovenaan het reglement (of in bijlage) wordt beschreven, anderzijds expliciet wanneer de zones opgelijst staan in het artikel/hoofdstuk van de dienstverlening.
 
 ### Impliciet
 
@@ -83,14 +100,19 @@ Om de zones van de dienstverlening terug te vinden, gebruiken we dus het besluit
             <p>
 Volgende straten worden voorzien van een verkeersbord F103, al dan niet met een onderbord dat de wettelijke uitzonderingen bepaalt:
             </p>
-    <div resource="https://data.leuven.be/id/zone/x1"
+    <div resource="https://data.leuven.be/id/zone/1"
       typeof="mobiliteit:Zone"
       property="prov:atLocation">
-
       <p>
-        1.	Stadsdeel blauw: 
+        1.	Stadsdeel blauw: ..
       </p>
-
+    </div>
+    <div resource="https://data.leuven.be/id/zone/2"
+      typeof="mobiliteit:Zone"
+      property="prov:atLocation">
+      <p>
+        2.	Stadsdeel groen: ..
+      </p>
     </div>  
   </div>
 </body>
