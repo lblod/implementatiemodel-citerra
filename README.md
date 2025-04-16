@@ -151,7 +151,7 @@ Volgende straten worden voorzien van een verkeersbord F103, al dan niet met een 
   </div>
 
   <div rev="dct:isPartOf" resource="http://data.lblod.info/id/besluiten/72b89f05-7398-4c12-890c-a130decac4f8" typeof="besluit:Besluit">
-    <p>Artikel 12. </p>
+    <p>Artikel 1. </p>
     <h4 class="h4" property="eli:title" datatype="xsd:string">De vergunning geldig voor één jaar en voor alle autovrije gebieden</h4>
     <span property="eli:language" resource="http://publications.europa.eu/resource/authority/language/NLD" typeof="skos:Concept">NL</span>
     <p property="eli:description" datatype="xsd:string"></p>
@@ -169,6 +169,26 @@ Volgende straten worden voorzien van een verkeersbord F103, al dan niet met een 
 ### Expliciet
 
 Wanneer de zone expliciet benoemd wordt bij de dienstverlening, beschrijven we de zone als een voorwaarde met type `zone` en een relatie naar een Zone-object:
+
+```
+  <div rev="dct:isPartOf" resource="http://data.lblod.info/id/besluiten/72b89f05-7398-4c12-890c-a130decac4f8" typeof="besluit:Besluit">
+    <p>Artikel 1. </p>
+    <h4 class="h4" property="eli:title" datatype="xsd:string">De vergunning geldig voor één jaar en voor autoluw gebied 1</h4>
+
+    <div property="sro:bekrachtigt" resource="http://data.lblod.info/id/dienstverlening/1" typeof="cpsv:PublicService">
+      <span property="m8g:hasCompetentAuthority" resource="https://data.lblod.info/id/bestuursorganen/4de2e9b8044fdac4a6b6ab0cabede7917dd7274c88ed8f5cadae89e1e5ee8bd6"></span>
+      <span property="mit:heeftOutputtype" resource="http://data.vlaanderen.be/id/concept/PubliekeDienstverleningOutputCode/5ab0e9b8a3b2ca7c5e00001b"></span>
+
+  <div typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/1">
+    <div property="dct:description" lang="nl">
+              § 1. Deze vergunning kan enkel aangevraagd worden voor volgende zones:
+            <span property="dct:type" value="https://data.vlaanderen.be/id/concept/voorwaarde/zone">Zone
+            <div property="prov:atLocation" typeof="https://data.vlaanderen.be/ns/mobiliteit#Zone" resource="https://data.gent.be/id/zone/x">
+            - autoluw gebied 1
+      </div>
+    </div>
+  </div>
+```
 
 ```
   <div typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/1">
