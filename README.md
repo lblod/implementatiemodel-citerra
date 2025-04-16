@@ -15,6 +15,7 @@ Later kunnen reglementteksten uit de praktijk hieraan toevoegd worden.
 prefix cpsv: <http://purl.org/vocab/cpsv#>
 prefix m8g: <http://data.europa.eu/m8g/>
 prefix mit: <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#>
+prefix dct: <http://purl.org/dc/terms/>
 
 select ?bestuurseenheid ?dienstverlening
 where {
@@ -83,27 +84,6 @@ In deze nieuwe aanpak wordt er vanuit 2 insteken vertrokken:
 
 * In welke zones is de dienstverlening van toepassing?
 
-```
-prefix mobiliteit: <https://data.vlaanderen.be/ns/mobiliteit#>
-prefix locn: <http://www.w3.org/ns/locn#>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix geosparql: <http://www.opengis.net/ont/geosparql#>
-prefix sro: <	https://data.vlaanderen.be/ns/slimmeraadpleegomgeving#>
-
-select ?zone ?zoneLabel ?wkt
-where {
-  ?reglement a foaf:Document ;
-           prov:atLocation ?zone .
-
-  ?besluit a besluit:Besluit ;
-          sro:isGerelateerdAan ?reglement ;
-          sro:bekrachtigt ?dienstverlening .
-
-  ?zone a mobiliteit:Zone .
-}
-```
-TODO type aan zone autoluw
-
 Zones kunnen op twee manieren gekoppeld worden aan de dienstverlening (vergunning).
 Enerzijds impliciet wanneer deze eenmalig bovenaan het reglement (of in bijlage) wordt beschreven, anderzijds expliciet wanneer de zones opgelijst staan in het artikel/hoofdstuk van de dienstverlening.
 
@@ -111,7 +91,32 @@ Enerzijds impliciet wanneer deze eenmalig bovenaan het reglement (of in bijlage)
 
 In een reglement worden zones typisch bovenaan eenmalig gedefinieerd, zoals definities.
 Deze zones zijn dan impliciet van toepassing bij de beschrijving van de dienstverlening.
-Om de zones van de dienstverlening terug te vinden, gebruiken we dus het besluit zelf waarin deze vermeld staan.
+
+Om de zones van de dienstverlening terug te vinden, gebruiken we dus het besluit zelf waarin deze vermeld staan:
+
+```
+prefix mobiliteit: <https://data.vlaanderen.be/ns/mobiliteit#>
+prefix locn: <http://www.w3.org/ns/locn#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix geosparql: <http://www.opengis.net/ont/geosparql#>
+prefix sro: <https://data.vlaanderen.be/ns/slimmeraadpleegomgeving#>
+prefix dct: <http://purl.org/dc/terms/>
+
+select ?dienstverlening ?zone
+where {
+  ?reglement a foaf:Document ;
+           prov:atLocation ?zone .
+
+  ?besluit a besluit:Besluit ;
+          dct:isPartOf ?reglement ;
+          sro:bekrachtigt ?dienstverlening .
+
+  ?zone a mobiliteit:Zone ;
+        dct:type ?zoneType .
+
+  VALUES ?zoneType { <http://data.vlaanderen.be/id/concept/ZoneType/5ab0e9b8a3b2ca7c5e00001b> }
+}
+```
 
 ```
 <head>
@@ -124,13 +129,14 @@ Om de zones van de dienstverlening terug te vinden, gebruiken we dus het besluit
 
 <div typeof="foaf:Document https://data.vlaanderen.be/id/concept/BesluitType/67378dd0-5413-474b-8996-d992ef81637a"
           resource="http://een.domein.van.leuven.be/leuven/a361ed84-4c47-4ee7-b2f9-2411a15d56ff-6">
-          <div resource="http://een.domein.van.leuven.be/reglement/a361ed84-4c47-4ee7-b2f9-2411a15d56ff-6">
+  <div resource="http://een.domein.van.leuven.be/reglement/a361ed84-4c47-4ee7-b2f9-2411a15d56ff-6">
             <p>
 Volgende straten worden voorzien van een verkeersbord F103, al dan niet met een onderbord dat de wettelijke uitzonderingen bepaalt:
             </p>
     <div resource="https://data.leuven.be/id/zone/1"
       typeof="mobiliteit:Zone"
       property="prov:atLocation">
+      <span property="dct:type" resource="http://data.vlaanderen.be/id/concept/ZoneType/5ab0e9b8a3b2ca7c5e00001b"></span>
       <p>
         1.	Stadsdeel blauw: ..
       </p>
@@ -138,10 +144,25 @@ Volgende straten worden voorzien van een verkeersbord F103, al dan niet met een 
     <div resource="https://data.leuven.be/id/zone/2"
       typeof="mobiliteit:Zone"
       property="prov:atLocation">
+      <span property="dct:type" resource="http://data.vlaanderen.be/id/concept/ZoneType/5ab0e9b8a3b2ca7c5e00001b"></span>
       <p>
         2.	Stadsdeel groen: ..
       </p>
     </div>  
+  </div>
+
+  <div rev="dct:isPartOf" resource="http://data.lblod.info/id/besluiten/72b89f05-7398-4c12-890c-a130decac4f8" typeof="besluit:Besluit">
+    <p>Artikel 12. </p>
+    <h4 class="h4" property="eli:title" datatype="xsd:string">De vergunning geldig voor één jaar en voor alle autovrije gebieden</h4>
+    <span property="eli:language" resource="http://publications.europa.eu/resource/authority/language/NLD" typeof="skos:Concept">NL</span>
+    <p property="eli:description" datatype="xsd:string"></p>
+
+    <div property="sro:bekrachtigt" resource="http://data.lblod.info/id/dienstverlening/1" typeof="cpsv:PublicService">
+      <span property="m8g:hasCompetentAuthority" resource="https://data.lblod.info/id/bestuursorganen/4de2e9b8044fdac4a6b6ab0cabede7917dd7274c88ed8f5cadae89e1e5ee8bd6"></span>
+      <span property="mit:heeftOutputtype" resource="http://data.vlaanderen.be/id/concept/PubliekeDienstverleningOutputCode/5ab0e9b8a3b2ca7c5e00001b"></span>
+      § 1. Deze vergunning kan worden aangevraagd door één van de volgende doelgroepen:
+        ...
+    </div>
   </div>
 </body>
 ```
