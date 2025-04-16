@@ -40,20 +40,23 @@ select ?zone ?zoneLabel ?wkt
 where {
   ?zone a mobiliteit:Zone ;
       locn:geometry ?geometrie ;
-      rdfs:label ?zonelabel .
+      rdfs:label ?zonelabel ;
+      dct:type ?zoneType .
 
   ?geometrie geosparql:asWKT ?wkt .
+
+  VALUES ?zoneType { <http://data.vlaanderen.be/id/concept/ZoneType/5ab0e9b8a3b2ca7c5e00001b> }
 }
 ```
 
-TODO: type toevoegen aan Zone om aan te duiden dat het een autoluwe zone is
+TODO: codelijst om type van een Zone aan te duiden, met name dat het een autoluwe zone is
 
 Om een autoluwe zone te beschrijven, gebruiken we de klasse `Zone` en eigenschappen `naam` en `geometrie`.
 
 ```
 <div prefix="besluit: http://data.vlaanderen.be/ns/besluit# mobiliteit: https://data.vlaanderen.be/ns/mobiliteit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/ dct: http://purl.org/dc/terms/">
     <div typeof="mobiliteit:Zone" resource="https://data.gent.be/id/zone/x">
-
+        <span property="dct:type" value="http://data.vlaanderen.be/id/concept/ZoneType/5ab0e9b8a3b2ca7c5e00001b"></span>
     1.	<span property="rdfs:label">Autoluw gebied 1</span>:
          <div property="locn:geometry" typeof="locn:Geometry" resource="https://data.gent.be/id/zone/x/geometrie/1">
           <span property="geosparql:asWKT" content="<http://www.opengis.net/def/crs/EPSG/0/31370> POINT(126306.58208223493 179948.9735279791)" datatype="geosparql:wktLiteral"></span>
