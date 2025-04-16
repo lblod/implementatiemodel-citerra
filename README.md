@@ -129,7 +129,6 @@ where {
 
 <div typeof="foaf:Document https://data.vlaanderen.be/id/concept/BesluitType/67378dd0-5413-474b-8996-d992ef81637a"
           resource="http://een.domein.van.leuven.be/leuven/a361ed84-4c47-4ee7-b2f9-2411a15d56ff-6">
-  <div resource="http://een.domein.van.leuven.be/reglement/a361ed84-4c47-4ee7-b2f9-2411a15d56ff-6">
             <p>
 Volgende straten worden voorzien van een verkeersbord F103, al dan niet met een onderbord dat de wettelijke uitzonderingen bepaalt:
             </p>
