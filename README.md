@@ -136,18 +136,22 @@ Volgende straten worden voorzien van een verkeersbord F103, al dan niet met een 
       typeof="mobiliteit:Zone"
       property="prov:atLocation">
       <span property="dct:type" resource="http://data.vlaanderen.be/id/concept/ZoneType/5ab0e9b8a3b2ca7c5e00001b"></span>
-      <p>
-        1.	Stadsdeel blauw: ..
-      </p>
+        <span property="rdfs:label">Stadsdeel blauw</span>:
+        <div property="locn:geometry" typeof="locn:Geometry" resource="https://data.leuven.be/id/zone/1/geometrie/1">
+          <span property="geosparql:asWKT" content="<http://www.opengis.net/def/crs/EPSG/0/31370> POINT(126306.58208223493 179948.9735279791)" datatype="geosparql:wktLiteral"></span>
+        </div>
+      </span>
     </div>
     <div resource="https://data.leuven.be/id/zone/2"
       typeof="mobiliteit:Zone"
       property="prov:atLocation">
       <span property="dct:type" resource="http://data.vlaanderen.be/id/concept/ZoneType/5ab0e9b8a3b2ca7c5e00001b"></span>
-      <p>
-        2.	Stadsdeel groen: ..
-      </p>
-    </div>  
+        <span property="rdfs:label">Stadsdeel groen</span>:
+        <div property="locn:geometry" typeof="locn:Geometry" resource="https://data.leuven.be/id/zone/2/geometrie/1">
+          <span property="geosparql:asWKT" content="<http://www.opengis.net/def/crs/EPSG/0/31370> POINT(126306.58208223493 179948.9735279791)" datatype="geosparql:wktLiteral"></span>
+        </div>
+      </span>
+    </div> 
   </div>
 
   <div rev="dct:isPartOf" resource="http://data.lblod.info/id/besluiten/72b89f05-7398-4c12-890c-a130decac4f8" typeof="besluit:Besluit">
@@ -176,26 +180,26 @@ Wanneer de zone expliciet benoemd wordt bij de dienstverlening, beschrijven we d
     <h4 class="h4" property="eli:title" datatype="xsd:string">De vergunning geldig voor één jaar en voor autoluw gebied 1</h4>
 
     <div property="sro:bekrachtigt" resource="http://data.lblod.info/id/dienstverlening/1" typeof="cpsv:PublicService">
-      <span property="m8g:hasCompetentAuthority" resource="https://data.lblod.info/id/bestuursorganen/4de2e9b8044fdac4a6b6ab0cabede7917dd7274c88ed8f5cadae89e1e5ee8bd6"></span>
+      <span property="m8g:hasCompetentAuthority" resource="https://data.lblod.info/id/bestuursorganen/4de2e9b8044fdac4a6b6ab0cabede7917dd7274c88ed8f5cadae89e1e5ee8bd6">        </span>
       <span property="mit:heeftOutputtype" resource="http://data.vlaanderen.be/id/concept/PubliekeDienstverleningOutputCode/5ab0e9b8a3b2ca7c5e00001b"></span>
 
-  <div typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/1">
-    <div property="dct:description" lang="nl">
-              § 1. Deze vergunning kan enkel aangevraagd worden voor volgende zones:
-            <span property="dct:type" value="https://data.vlaanderen.be/id/concept/voorwaarde/zone">Zone
-            <div property="prov:atLocation" typeof="https://data.vlaanderen.be/ns/mobiliteit#Zone" resource="https://data.gent.be/id/zone/x">
-            - autoluw gebied 1
+      <div property="http://vocab.belgif.be/ns/publicservice#hasRequirement" typeof="m8g:Requirement" resource="http://data.lblod.info/id/voorwaarden/1">
+        <span property="dct:type" value="https://data.vlaanderen.be/id/concept/VoorwaardeType/zone">
+        <div property="dct:description" lang="nl">
+            <p>§ 1. Deze vergunning kan enkel aangevraagd worden voor volgende zones:</p>
+            <div resource="https://data.lblod.info/id/zone/1"
+              typeof="mobiliteit:Zone"
+              property="prov:atLocation">
+              <span property="dct:type" resource="http://data.vlaanderen.be/id/concept/ZoneType/5ab0e9b8a3b2ca7c5e00001b"></span>
+              <p>- </p><span property="rdfs:label">Autoluwgebied 1</span>:
+              <div property="locn:geometry" typeof="locn:Geometry" resource="https://data.lblod.info/id/zone/1/geometrie/1">
+                <span property="geosparql:asWKT" content="<http://www.opengis.net/def/crs/EPSG/0/31370> POINT(126306.58208223493 179948.9735279791)" datatype="geosparql:wktLiteral"></span>
+              </div>
+            </div>
+        </div>
       </div>
-    </div>
-  </div>
-```
 
-```
-  <div typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/1">
-    <span property="dct:type" value="https://data.vlaanderen.be/id/concept/voorwaarde/zone">Zone
-    <div property="prov:atLocation" typeof="https://data.vlaanderen.be/ns/mobiliteit#Zone" resource="https://data.gent.be/id/zone/x"> X
-  </div>
-</div>
+    </div>
 ```
 
 ## Vergunningszone
