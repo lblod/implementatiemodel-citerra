@@ -36,6 +36,10 @@ prefix mobiliteit: <https://data.vlaanderen.be/ns/mobiliteit#>
 prefix locn: <http://www.w3.org/ns/locn#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix geosparql: <http://www.opengis.net/ont/geosparql#>
+prefix cpsv: <http://purl.org/vocab/cpsv#>
+prefix m8g: <http://data.europa.eu/m8g/>
+prefix mit: <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#>
+prefix dct: <http://purl.org/dc/terms/>
 
 select ?zone ?zoneLabel ?wkt
 where {
@@ -82,7 +86,7 @@ In deze nieuwe aanpak wordt er vanuit 2 insteken vertrokken:
 
 ## Vergunningszone
 
-* In welke zones is de dienstverlening van toepassing?
+* In welke zones is er een dienstverlening "vergunning autoluwe zone" van toepassing?
 
 Zones kunnen op twee manieren gekoppeld worden aan de dienstverlening (vergunning).
 Enerzijds impliciet wanneer deze eenmalig bovenaan het reglement (of in bijlage) wordt beschreven, anderzijds expliciet wanneer de zones opgelijst staan in het artikel/hoofdstuk van de dienstverlening.
@@ -103,6 +107,9 @@ prefix sro: <https://data.vlaanderen.be/ns/slimmeraadpleegomgeving#>
 prefix dct: <http://purl.org/dc/terms/>
 prefix belgif: <http://vocab.belgif.be/ns/publicservice#>
 prefix ext: <http://mu.semte.ch/vocabularies/ext/>
+prefix cpsv: <http://purl.org/vocab/cpsv#>
+prefix m8g: <http://data.europa.eu/m8g/>
+prefix mit: <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#>
 
 select ?dienstverlening ?zone
 where {
@@ -218,17 +225,59 @@ Wanneer de zone expliciet benoemd wordt bij de dienstverlening, beschrijven we d
 
 TODO: OSLO Intelligente toegang vocabularium uitbreiden met term om rechtstreeks van een Requirement de te verwachten waarde te beschrijven. Momenteel "ext:expectedValue". In CCCEV is het enkel mogelijk om via Information Concept de expected value te beschrijven, en moet via een "regel"-taal gebeuren (RIF, SHACL...). Om 1 specifieke waarde aan te duiden is dit dus overkill.
 
-## Vergunningszone
-
-* Welke zones hebben een vergunning nodig?
-
 ## Algemene voorwaarden
 
-* Welke voorwaarden (en evt. bijhorende bewijsstukken) zijn van toepassing?
-
-## Doelgroep
-
 * Welke doelgroepen komen in aanmerking voor een vergunning?
+
+```
+prefix mobiliteit: <https://data.vlaanderen.be/ns/mobiliteit#>
+prefix locn: <http://www.w3.org/ns/locn#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix geosparql: <http://www.opengis.net/ont/geosparql#>
+prefix sro: <https://data.vlaanderen.be/ns/slimmeraadpleegomgeving#>
+prefix dct: <http://purl.org/dc/terms/>
+prefix belgif: <http://vocab.belgif.be/ns/publicservice#>
+prefix ext: <http://mu.semte.ch/vocabularies/ext/>
+prefix cpsv: <http://purl.org/vocab/cpsv#>
+prefix m8g: <http://data.europa.eu/m8g/>
+prefix mit: <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#>
+
+select ?dienstverlening ?doelgroep
+where {
+  ?dienstverlening belgif:hasRequirement ?voorwaarde .
+
+  ?voorwaarde dct:type <https://data.vlaanderen.be/id/concept/VoorwaardeType/doelgroep> ;
+              ext:expectedValue ?doelgroep .
+}
+```
+
+```
+<div property="sro:bekrachtigt" resource="http://data.lblod.info/id/dienstverlening/1" typeof="cpsv:PublicService">
+      <p>§ 1. Deze vergunning kan worden aangevraagd door één van de volgende doelgroepen:</p>
+      <div property="belgif:hasRequirement" typeof="m8g:Requirement" resource="http://data.lblod.info/id/voorwaarden/1">
+        <span property="dct:type" value="https://data.vlaanderen.be/id/concept/VoorwaardeType/doelgroep">
+        <div property="dct:description" lang="nl">
+            - <span property="ext:expectedValue" resource="https://data.lblod.info/id/doelgroep/1" typeof="skos:Concept">Zorgverstrekker</span>
+        </div>
+      </div>
+      <div property="belgif:hasRequirement" typeof="m8g:Requirement" resource="http://data.lblod.info/id/voorwaarden/2">
+        <span property="dct:type" value="https://data.vlaanderen.be/id/concept/VoorwaardeType/doelgroep">
+        <div property="dct:description" lang="nl">
+            - <span property="ext:expectedValue" resource="https://data.lblod.info/id/doelgroep/2" typeof="skos:Concept">de rechtspersoon die nutsdiensten levert</span>
+        </div>
+      </div>
+</div>
+```
+
+Idealiter is "Doelgroep" een Voorwaardecollectie met een OF-operand en zijn de specifieke doelgroepen Voorwaarden hiervan, maar hier wordt er impliciet een OF verondersteld. Als het formulier enkel de lijst van doelgroepen wil ophalen zoals in de query hierboven, heeft het geen zin om dit complexer te maken.
+
+* Welke activiteiten komen in aanmerking voor een vergunning?
+
+
+
+
+## Specifieke voorwaarden
+
 * Welke specifieke voorwaarden zijn er?
 
 ## Periode 
