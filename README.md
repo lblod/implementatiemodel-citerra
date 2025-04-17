@@ -101,11 +101,12 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix geosparql: <http://www.opengis.net/ont/geosparql#>
 prefix sro: <https://data.vlaanderen.be/ns/slimmeraadpleegomgeving#>
 prefix dct: <http://purl.org/dc/terms/>
+prefix belgif: <http://vocab.belgif.be/ns/publicservice#>
+prefix ext: <http://mu.semte.ch/vocabularies/ext/>
 
 select ?dienstverlening ?zone
 where {
-  ?reglement a foaf:Document ;
-           prov:atLocation ?zone .
+  ?reglement a foaf:Document .
 
   ?besluit a besluit:Besluit ;
           dct:isPartOf ?reglement ;
@@ -113,6 +114,19 @@ where {
 
   ?zone a mobiliteit:Zone ;
         dct:type ?zoneType .
+
+  {
+    ?reglement prov:atLocation ?zone .
+    FILTER NOT EXISTS {
+      ?dienstverlening belgif:hasRequirement/dct:type <https://data.vlaanderen.be/id/concept/VoorwaardeType/zone> .
+    }
+  }
+  UNION {
+    ?dienstverlening belgif:hasRequirement ?voorwaarde .
+
+    ?voorwaarde dct:type <https://data.vlaanderen.be/id/concept/VoorwaardeType/zone> ;
+                ext:expectedValue ?zone .
+  }
 
   VALUES ?zoneType { <http://data.vlaanderen.be/id/concept/ZoneType/5ab0e9b8a3b2ca7c5e00001b> }
 }
@@ -189,7 +203,7 @@ Wanneer de zone expliciet benoemd wordt bij de dienstverlening, beschrijven we d
             <p>§ 1. Deze vergunning kan enkel aangevraagd worden voor volgende zones:</p>
             <div resource="https://data.lblod.info/id/zone/1"
               typeof="mobiliteit:Zone"
-              property="prov:atLocation">
+              property="ext:expectedValue">
               <span property="dct:type" resource="http://data.vlaanderen.be/id/concept/ZoneType/5ab0e9b8a3b2ca7c5e00001b"></span>
               <p>- </p><span property="rdfs:label">Autoluwgebied 1</span>:
               <div property="locn:geometry" typeof="locn:Geometry" resource="https://data.lblod.info/id/zone/1/geometrie/1">
@@ -201,6 +215,8 @@ Wanneer de zone expliciet benoemd wordt bij de dienstverlening, beschrijven we d
 
     </div>
 ```
+
+TODO: OSLO Intelligente toegang vocabularium uitbreiden met term om rechtstreeks van een Requirement de te verwachten waarde te beschrijven. Momenteel "ext:expectedValue". In CCCEV is het enkel mogelijk om via Information Concept de expected value te beschrijven, en moet via een "regel"-taal gebeuren (RIF, SHACL...). Om 1 specifieke waarde aan te duiden is dit dus overkill.
 
 ## Vergunningszone
 
