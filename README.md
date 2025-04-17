@@ -273,7 +273,46 @@ Idealiter is "Doelgroep" een Voorwaardecollectie met een OF-operand en zijn de s
 
 * Welke activiteiten komen in aanmerking voor een vergunning?
 
+```
+prefix mobiliteit: <https://data.vlaanderen.be/ns/mobiliteit#>
+prefix locn: <http://www.w3.org/ns/locn#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix geosparql: <http://www.opengis.net/ont/geosparql#>
+prefix sro: <https://data.vlaanderen.be/ns/slimmeraadpleegomgeving#>
+prefix dct: <http://purl.org/dc/terms/>
+prefix belgif: <http://vocab.belgif.be/ns/publicservice#>
+prefix ext: <http://mu.semte.ch/vocabularies/ext/>
+prefix cpsv: <http://purl.org/vocab/cpsv#>
+prefix m8g: <http://data.europa.eu/m8g/>
+prefix mit: <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#>
 
+select ?dienstverlening ?activiteit
+where {
+  ?dienstverlening belgif:hasRequirement ?voorwaarde .
+
+  ?voorwaarde dct:type <https://data.vlaanderen.be/id/concept/VoorwaardeType/activiteit> ;
+              ext:expectedValue ?activiteit .
+}
+```
+
+```
+<div property="sro:bekrachtigt" resource="http://data.lblod.info/id/dienstverlening/1" typeof="cpsv:PublicService">
+      ...
+      <p>De vergunning heeft als doel om op regelmatige en onvoorzienbare tijdstippen in de autovrije gebieden:</p>
+      <div property="belgif:hasRequirement" typeof="m8g:Requirement" resource="http://data.lblod.info/id/voorwaarden/1">
+        <span property="dct:type" value="https://data.vlaanderen.be/id/concept/VoorwaardeType/activiteit">
+        <div property="dct:description" lang="nl">
+            - <span property="ext:expectedValue" resource="http://data.lblod.info/id/dienstverlening/1/activiteit/1" typeof="skos:Concept">a. goederen te laden en te lossen;</span>
+        </div>
+      </div>
+      <div property="belgif:hasRequirement" typeof="m8g:Requirement" resource="http://data.lblod.info/id/voorwaarden/2">
+        <span property="dct:type" value="https://data.vlaanderen.be/id/concept/VoorwaardeType/activiteit">
+        <div property="dct:description" lang="nl">
+            - <span property="ext:expectedValue" resource="http://data.lblod.info/id/dienstverlening/1/activiteit/2" typeof="skos:Concept">b. naar een garage of standplaats te rijden.</span>
+        </div>
+      </div>
+</div>
+```
 
 
 ## Specifieke voorwaarden
