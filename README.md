@@ -357,11 +357,44 @@ where {
 }
 ```
 
-Opmerking: wanneer de specifieke voorwaarde niet uit de codelijst komt, dan is er misschien geen type.
+Opmerking: het type van de specifieke voorwaarde is optioneel, wanneer deze niet uit de codelijst komt.
+
+```
+  a. voor de zorgverstrekker , vermeld in § 1, a.:
+
+<div property="belgif:hasRequirement" typeof="m8g:Requirement" resource="http://data.lblod.info/id/voorwaarden/3">
+  </span>
+  <span property="dct:type" value="https://data.vlaanderen.be/id/concept/VoorwaardeType/activiteit">
+  <div property="dct:description" lang="nl">
+    1) hetzij, voor huisbezoek aan patiënten
+     <span property="m8g:isRequirementOf" resource="http://data.lblod.info/id/voorwaarden/1"></span>
+  </div>
+</div>
+```
 
 ## Bewijsstukken
 
-Welk(e) bewijsstuk(ken) zijn nodig om aan te tonen dat een voorwaarde voldaan is?
+* Welk(e) bewijsstuk(ken) zijn nodig om aan te tonen dat een voorwaarde voldaan is?
+
+```
+<p>Bij de aanvraag van deze vergunning moeten de volgende gegevens worden opgegeven en de
+volgende bewijsstukken worden gevoegd:</p>
+
+  a. voor de zorgverstrekker , vermeld in § 1, a.:
+
+    1) hetzij een
+    <div about="http://data.lblod.info/id/voorwaarden/1">
+      <div rev="m8g:hasEvidenceTypeList" typeof="m8g:EvidenceTypeList" resource="https://data.lblod.info.id/bewijstypelijst/1">
+          <div property="m8g:specifiesEvidenceType" typeof="m8g:EvidenceType" resource="https://data.lblod.info/id/bewijstype/1">
+              <div property="m8g:evidenceTypeClassification" value="https://data.vlaanderen.be/id/concept/bewijstypeclassificatie/riziv-nummer">
+                <span property="skos:prefLabel" language="nl">RIZIV-nummer</span>;
+              </div>
+            </div>
+      </div>
+    </div>
+```
+
+Opmerking: het RDFa attribuut "about" wordt gebruikt om het bewijsstuk aan een specifieke voorwaarde ("zorgverstrekker" toe te voegen)
 
 ## Kenmerken van toepassing op de selectie van voorwaarde
 
