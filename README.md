@@ -302,13 +302,17 @@ where {
       <div property="belgif:hasRequirement" typeof="m8g:Requirement" resource="http://data.lblod.info/id/voorwaarden/1">
         <span property="dct:type" value="https://data.vlaanderen.be/id/concept/VoorwaardeType/activiteit">
         <div property="dct:description" lang="nl">
-            - <span property="ext:expectedValue" resource="http://data.lblod.info/id/dienstverlening/1/activiteit/1" typeof="skos:Concept">a. goederen te laden en te lossen;</span>
+            - a. <div property="ext:expectedValue" resource="http://data.lblod.info/id/dienstverlening/1/activiteit/1" typeof="skos:Concept">
+                  <span property="skos:prefLabel" language="nl">goederen te laden en te lossen</span>
+                ;</div>
         </div>
       </div>
       <div property="belgif:hasRequirement" typeof="m8g:Requirement" resource="http://data.lblod.info/id/voorwaarden/2">
         <span property="dct:type" value="https://data.vlaanderen.be/id/concept/VoorwaardeType/activiteit">
         <div property="dct:description" lang="nl">
-            - <span property="ext:expectedValue" resource="http://data.lblod.info/id/dienstverlening/1/activiteit/2" typeof="skos:Concept">b. naar een garage of standplaats te rijden.</span>
+            - b. <div property="ext:expectedValue" resource="http://data.lblod.info/id/dienstverlening/1/activiteit/2" typeof="skos:Concept">
+                <span property="skos:prefLabel" language="nl">naar een garage of standplaats te rijden</span>
+              .</div>
         </div>
       </div>
 </div>
@@ -317,11 +321,60 @@ where {
 
 ## Specifieke voorwaarden
 
-* Welke specifieke voorwaarden zijn er?
+* Welke voorwaarden zijn er specifiek voor deze voorwaarde (doelgroep)?
 
-## Periode 
+Naast het behoren tot een bepaalde doelgroep, kunnen er nog andere voorwaarden van toepassing zijn, zoals:
+* functie: nutdienst, mantelverzorger
+* speciale toestand: gehandicapt, minder mobiel
+* activiteit: levering, verhuis, werf
 
-* Voor hoelang kan ik een vergunning aanvragen?
+```
+prefix mobiliteit: <https://data.vlaanderen.be/ns/mobiliteit#>
+prefix locn: <http://www.w3.org/ns/locn#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix geosparql: <http://www.opengis.net/ont/geosparql#>
+prefix sro: <https://data.vlaanderen.be/ns/slimmeraadpleegomgeving#>
+prefix dct: <http://purl.org/dc/terms/>
+prefix belgif: <http://vocab.belgif.be/ns/publicservice#>
+prefix ext: <http://mu.semte.ch/vocabularies/ext/>
+prefix cpsv: <http://purl.org/vocab/cpsv#>
+prefix m8g: <http://data.europa.eu/m8g/>
+prefix mit: <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+select ?specifiekeVoorwaarde ?specifiekeVoorwaarde ?voorwaarde
+where {
+  ?specifiekeVoorwaarde m8g:isRequirementOf ?voorwaarde ;
+
+  OPTIONAL {
+    ?specifiekeVoorwaarde dct:type ?specifiekeVoorwaardeType .
+  }
+
+  ?specifiekeVoorwaarde ext:expectedValue ?verwachteWaardeVanSpecifiekeVoorwaarde .
+  ?verwachteWaardeVanSpecifiekeVoorwaarde skos:prefLabel ?verwachteWaardeVanSpecifiekeVoorwaardeLabel .
+
+  VALUE ?voorwaarde { <http://data.lblod.info/id/voorwaarden/1> }
+}
+```
+
+Opmerking: wanneer de specifieke voorwaarde niet uit de codelijst komt, dan is er misschien geen type.
+
+## Bewijsstukken
+
+Welk(e) bewijsstuk(ken) zijn nodig om aan te tonen dat een voorwaarde voldaan is?
+
+## Kenmerken van toepassing op de selectie van voorwaarde
+
+Afhankelijk van de doelgroep, activiteit... zijn andere kenmerken van toepassing.
+
+Voorbeelden van kenmerken:
+* Aantal zones waarvoor de vergunning aangevraagd kan worden
+* De duurtijd (Tijdschema: beperkte periode, van uren tot dagen tot jaren)
+* Tijdsvenster (onbeperkt of tussen bepaalde uren)
+* Aantal nummerplaten
+* Kostprijs
+
+
 
 # Oude aanpak
 
