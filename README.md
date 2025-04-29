@@ -407,6 +407,8 @@ volgende bewijsstukken worden gevoegd:</p>
 
 Opmerking: het RDFa attribuut "about" wordt gebruikt om het bewijsstuk aan een specifieke voorwaarde ("zorgverstrekker") toe te voegen.
 
+TODO: codelijst bewijstypeclassificatie
+
 ### Bewijsstuk in combinatie met specifieke voorwaarde beschrijven
 
 ```
