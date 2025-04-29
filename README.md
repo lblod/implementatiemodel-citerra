@@ -382,7 +382,10 @@ Dan is er enkel een beschrijving van de voorwaarde.
 
 ## Bewijsstukken
 
+
 * Welk(e) bewijsstuk(ken) zijn nodig om aan te tonen dat een voorwaarde voldaan is?
+
+### Bewijsstuk aan 1 voorwaarde hangen
 
 ```
 <p>Bij de aanvraag van deze vergunning moeten de volgende gegevens worden opgegeven en de
@@ -402,7 +405,40 @@ volgende bewijsstukken worden gevoegd:</p>
     </div>
 ```
 
-Opmerking: het RDFa attribuut "about" wordt gebruikt om het bewijsstuk aan een specifieke voorwaarde ("zorgverstrekker" toe te voegen)
+Opmerking: het RDFa attribuut "about" wordt gebruikt om het bewijsstuk aan een specifieke voorwaarde ("zorgverstrekker") toe te voegen.
+
+### Bewijsstuk in combinatie met specifieke voorwaarde beschrijven
+
+```
+  a. voor de zorgverstrekker , vermeld in § 1, a.:
+
+<div property="belgif:hasRequirement" typeof="m8g:Requirement" resource="http://data.lblod.info/id/voorwaarden/3">
+  <span property="m8g:isRequirementOf" resource="http://data.lblod.info/id/voorwaarden/1"></span>
+  <span property="dct:type" value="https://data.vlaanderen.be/id/concept/VoorwaardeType/activiteit">
+  <div property="dct:description" lang="nl">
+    1) hetzij, voor <div property="ext:expectedValue" resource="http://data.lblod.info/id/voorwaarden/3/expectedvalue/1" typeof="skos:Concept">
+                  <span property="skos:prefLabel" language="nl">huisbezoek aan patiënten</span>
+                ,</div>
+
+  <div rev="m8g:hasEvidenceTypeList" typeof="m8g:EvidenceTypeList" resource="http://data.lblod.info/id/voorwaarden/3/bewijstypelijst/1">
+          <div property="m8g:specifiesEvidenceType" typeof="m8g:EvidenceType" resource="http://data.lblod.info/id/voorwaarden/3/bewijstype/1">
+              <div property="m8g:evidenceTypeClassification" resource="http://data.lblod.info/id/voorwaarden/3/bewijstypeclassificatie/1" type="skos:Concept">
+                <span property="skos:prefLabel" language="nl">een visum van de Federale Overheidsdienst
+Volksgezondheid en/of erkenning bij het Agentschap Zorg en Gezondheid, vereist om een
+beroep in de gezondheidszorg te mogen uitoefenen. In dit geval voegt de aanvrager ook
+een tewerkstellingsattest van de werkgever toe. Dit attest mag niet ouder zijn dan drie
+maanden.
+                </span>;
+              </div>
+            </div>
+      </div>
+
+, 
+  </div>
+</div>
+```
+
+TODO: te bekijken of we de complexiteit van verschillende bewijsstukken (en/of) willen modelleren
 
 ## Kenmerken van toepassing op de selectie van voorwaarde
 
