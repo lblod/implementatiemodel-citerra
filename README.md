@@ -421,20 +421,28 @@ Opmerking: het RDFa attribuut "about" wordt gebruikt om het bewijsstuk aan een s
                 ,</div>
 
   <div rev="m8g:hasEvidenceTypeList" typeof="m8g:EvidenceTypeList" resource="http://data.lblod.info/id/voorwaarden/3/bewijstypelijst/1">
-          <div property="m8g:specifiesEvidenceType" typeof="m8g:EvidenceType" resource="http://data.lblod.info/id/voorwaarden/3/bewijstype/1">
-              <div property="m8g:evidenceTypeClassification" resource="http://data.lblod.info/id/voorwaarden/3/bewijstypeclassificatie/1" type="skos:Concept">
-                <span property="skos:prefLabel" language="nl">een visum van de Federale Overheidsdienst
-Volksgezondheid en/of erkenning bij het Agentschap Zorg en Gezondheid, vereist om een
+        <div property="m8g:specifiesEvidenceType" typeof="m8g:EvidenceType" resource="http://data.lblod.info/id/voorwaarden/3/bewijstype/1">
+            <div property="m8g:evidenceTypeClassification" resource="https://data.vlaanderen.be/id/concept/bewijstypeclassificatie/visum-volksgezondheid" type="skos:Concept">
+              <span property="skos:prefLabel" language="nl">een visum van de Federale Overheidsdienst
+Volksgezondheid</span>
+            </div>
+        </div>
+  </div>
+
+  en/of
+
+  <div rev="m8g:hasEvidenceTypeList" typeof="m8g:EvidenceTypeList" resource="http://data.lblod.info/id/voorwaarden/3/bewijstypelijst/2">
+        <div property="m8g:specifiesEvidenceType" typeof="m8g:EvidenceType" resource="http://data.lblod.info/id/voorwaarden/3/bewijstype/2">
+            <div property="m8g:evidenceTypeClassification" resource="https://data.vlaanderen.be/id/concept/bewijstypeclassificatie/erkenning-beroep-gezondheidszorg" type="skos:Concept">
+              <span property="skos:prefLabel" language="nl">erkenning bij het Agentschap Zorg en Gezondheid, vereist om een
 beroep in de gezondheidszorg te mogen uitoefenen. In dit geval voegt de aanvrager ook
 een tewerkstellingsattest van de werkgever toe. Dit attest mag niet ouder zijn dan drie
-maanden.
-                </span>;
-              </div>
+maanden</span>
             </div>
-      </div>
+        </div>
+  </div>          
+.
 
-, 
-  </div>
 </div>
 ```
 
