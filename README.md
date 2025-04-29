@@ -459,9 +459,9 @@ Voorbeelden van kenmerken:
 * De duurtijd (Tijdschema: beperkte periode, van uren tot dagen tot jaren)
 * Tijdsvenster (onbeperkt of tussen bepaalde uren)
 * Aantal nummerplaten
-* Kostprijs
+* Kostprijs (mappen op https://semiceu.github.io/CPSV-AP/releases/3.2.0/#Cost)
 
-
+Idee: kenmerken modelleren adhv een "Vergunningsprofiel" dat bestaat uit verschillende soorten kenmerken. Gelijkaardig aan de manier waarop participantkenmerken van een culturele activiteit worden gemodelleerd: https://data.vlaanderen.be/doc/applicatieprofiel/cultuurparticipatie/#Participantprofiel
 
 # Oude aanpak
 
