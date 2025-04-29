@@ -342,16 +342,20 @@ prefix m8g: <http://data.europa.eu/m8g/>
 prefix mit: <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
-select ?specifiekeVoorwaarde ?specifiekeVoorwaarde ?voorwaarde
+select ?specifiekeVoorwaardeBeschrijving ?verwachteWaardeVanSpecifiekeVoorwaardeLabel
 where {
   ?specifiekeVoorwaarde m8g:isRequirementOf ?voorwaarde ;
+                        dct:description ?specifiekeVoorwaardeBeschrijving .
 
   OPTIONAL {
     ?specifiekeVoorwaarde dct:type ?specifiekeVoorwaardeType .
   }
 
-  ?specifiekeVoorwaarde ext:expectedValue ?verwachteWaardeVanSpecifiekeVoorwaarde .
-  ?verwachteWaardeVanSpecifiekeVoorwaarde skos:prefLabel ?verwachteWaardeVanSpecifiekeVoorwaardeLabel .
+  OPTIONAL {
+    ?specifiekeVoorwaarde ext:expectedValue ?verwachteWaardeVanSpecifiekeVoorwaarde .
+    ?verwachteWaardeVanSpecifiekeVoorwaarde skos:prefLabel ?verwachteWaardeVanSpecifiekeVoorwaardeLabel .
+  }
+
 
   VALUE ?voorwaarde { <http://data.lblod.info/id/voorwaarden/1> }
 }
@@ -363,14 +367,18 @@ Opmerking: het type van de specifieke voorwaarde is optioneel, wanneer deze niet
   a. voor de zorgverstrekker , vermeld in § 1, a.:
 
 <div property="belgif:hasRequirement" typeof="m8g:Requirement" resource="http://data.lblod.info/id/voorwaarden/3">
-  </span>
+  <span property="m8g:isRequirementOf" resource="http://data.lblod.info/id/voorwaarden/1"></span>
   <span property="dct:type" value="https://data.vlaanderen.be/id/concept/VoorwaardeType/activiteit">
   <div property="dct:description" lang="nl">
-    1) hetzij, voor huisbezoek aan patiënten
-     <span property="m8g:isRequirementOf" resource="http://data.lblod.info/id/voorwaarden/1"></span>
+    1) hetzij, voor <div property="ext:expectedValue" resource="http://data.lblod.info/id/voorwaarden/3/expectedvalue/1" typeof="skos:Concept">
+                  <span property="skos:prefLabel" language="nl">huisbezoek aan patiënten</span>
+                ;</div>
   </div>
 </div>
 ```
+
+Het beschrijven van de verwachte waarde aan de hand van een codelijst kan optioneel zijn.
+Dan is er enkel een beschrijving van de voorwaarde.
 
 ## Bewijsstukken
 
