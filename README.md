@@ -60,10 +60,10 @@ Om een autoluwe zone te beschrijven, gebruiken we de klasse `Zone` en eigenschap
 
 ```
 <div prefix="besluit: http://data.vlaanderen.be/ns/besluit# mobiliteit: https://data.vlaanderen.be/ns/mobiliteit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/ dct: http://purl.org/dc/terms/">
-    <div typeof="mobiliteit:Zone" resource="https://data.gent.be/id/zone/x">
+    <div typeof="mobiliteit:Zone" resource="https://data.lblod.info/id/autoluwezone/1">
         <span property="dct:type" value="http://data.vlaanderen.be/id/concept/ZoneType/5ab0e9b8a3b2ca7c5e00001b"></span>
     1.	<span property="rdfs:label">Autoluw gebied 1</span>:
-         <div property="locn:geometry" typeof="locn:Geometry" resource="https://data.gent.be/id/zone/x/geometrie/1">
+         <div property="locn:geometry" typeof="locn:Geometry" resource="https://data.lblod.info/id/autoluwezone/1/geometrie/1">
           <span property="geosparql:asWKT" content="<http://www.opengis.net/def/crs/EPSG/0/31370> POINT(126306.58208223493 179948.9735279791)" datatype="geosparql:wktLiteral"></span>
         </div>
     •	Diestsestraat, tussen Margarethaplein en huisnummer 188/209 en tussen Vanden Tymplestraat en R23; 
@@ -78,7 +78,7 @@ Om een autoluwe zone te beschrijven, gebruiken we de klasse `Zone` en eigenschap
 
 TODO: straten annoteren
 
-# Nieuwe aanpak
+# Bottom-up
 
 In deze nieuwe aanpak wordt er vanuit 2 insteken vertrokken:
 - welke informatie (query) moet een formulier kunnen opvragen om het formulier te kunnen opbouwen
@@ -149,26 +149,26 @@ where {
   <div vocab="http://data.vlaanderen.be/ns/besluit#" prefix="lblod: http://data.lblod.info/vocabularies/lblod/ eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# mandaat: http://data.vlaanderen.be/ns/mandaat# besluit: http://data.vlaanderen.be/ns/besluit# generiek: http://data.vlaanderen.be/ns/generiek# person: http://www.w3.org/ns/person# persoon: http://data.vlaanderen.be/ns/persoon# dct: http://purl.org/dc/terms/ skos: http://www.w3.org/2004/02/skos/core# org: http://www.w3.org/ns/org# foaf: http://xmlns.com/foaf/0.1/ ext: http://mu.semte.ch/vocabularies/ext/ besluittype: https://data.vlaanderen.be/id/concept/BesluitType/ elod: http://linkedeconomy.org/ontology# lblodBesluit: http://lblod.data.gift/vocabularies/besluit/ mobiliteit: https://data.vlaanderen.be/ns/mobiliteit#">
 
 <div typeof="foaf:Document https://data.vlaanderen.be/id/concept/BesluitType/67378dd0-5413-474b-8996-d992ef81637a"
-          resource="http://een.domein.van.leuven.be/leuven/a361ed84-4c47-4ee7-b2f9-2411a15d56ff-6">
+          resource="http://data.lblod.info/id/document/a361ed84-4c47-4ee7-b2f9-2411a15d56ff-6">
             <p>
 Volgende straten worden voorzien van een verkeersbord F103, al dan niet met een onderbord dat de wettelijke uitzonderingen bepaalt:
             </p>
-    <div resource="https://data.leuven.be/id/zone/1"
+    <div resource="https://data.lblod.info/id/zone/1"
       typeof="mobiliteit:Zone"
       property="prov:atLocation">
       <span property="dct:type" resource="http://data.vlaanderen.be/id/concept/ZoneType/5ab0e9b8a3b2ca7c5e00001b"></span>
         <span property="rdfs:label">Stadsdeel blauw</span>:
-        <div property="locn:geometry" typeof="locn:Geometry" resource="https://data.leuven.be/id/zone/1/geometrie/1">
+        <div property="locn:geometry" typeof="locn:Geometry" resource="https://data.lblod.info/id/zone/1/geometrie/1">
           <span property="geosparql:asWKT" content="<http://www.opengis.net/def/crs/EPSG/0/31370> POINT(126306.58208223493 179948.9735279791)" datatype="geosparql:wktLiteral"></span>
         </div>
       </span>
     </div>
-    <div resource="https://data.leuven.be/id/zone/2"
+    <div resource="https://data.lblod.info/id/zone/2"
       typeof="mobiliteit:Zone"
       property="prov:atLocation">
       <span property="dct:type" resource="http://data.vlaanderen.be/id/concept/ZoneType/5ab0e9b8a3b2ca7c5e00001b"></span>
         <span property="rdfs:label">Stadsdeel groen</span>:
-        <div property="locn:geometry" typeof="locn:Geometry" resource="https://data.leuven.be/id/zone/2/geometrie/1">
+        <div property="locn:geometry" typeof="locn:Geometry" resource="https://data.lblod.info/id/zone/2/geometrie/1">
           <span property="geosparql:asWKT" content="<http://www.opengis.net/def/crs/EPSG/0/31370> POINT(126306.58208223493 179948.9735279791)" datatype="geosparql:wktLiteral"></span>
         </div>
       </span>
@@ -257,7 +257,7 @@ where {
       <div property="belgif:hasRequirement" typeof="m8g:Requirement" resource="http://data.lblod.info/id/voorwaarden/1">
         <span property="dct:type" value="https://data.vlaanderen.be/id/concept/VoorwaardeType/doelgroep">
         <div property="dct:description" lang="nl">
-            - <span property="ext:expectedValue" resource="https://data.lblod.info/id/doelgroep/1" typeof="skos:Concept">Zorgverstrekker</span>
+            - <span property="ext:expectedValue" resource="https://data.lblod.info/id/doelgroep/1" typeof="skos:Concept">de ondernemer</span>
         </div>
       </div>
       <div property="belgif:hasRequirement" typeof="m8g:Requirement" resource="http://data.lblod.info/id/voorwaarden/2">
@@ -311,7 +311,7 @@ where {
         <span property="dct:type" value="https://data.vlaanderen.be/id/concept/VoorwaardeType/activiteit">
         <div property="dct:description" lang="nl">
             - b. <div property="ext:expectedValue" resource="http://data.lblod.info/id/dienstverlening/1/activiteit/2" typeof="skos:Concept">
-                <span property="skos:prefLabel" language="nl">naar een garage of standplaats te rijden</span>
+                <span property="skos:prefLabel" language="nl">werken uit te voeren</span>
               .</div>
         </div>
       </div>
@@ -364,14 +364,14 @@ where {
 Opmerking: het type van de specifieke voorwaarde is optioneel, wanneer deze niet uit de codelijst komt.
 
 ```
-  a. voor de zorgverstrekker , vermeld in § 1, a.:
+  a. voor de ondernemer , vermeld in § 1:
 
 <div property="belgif:hasRequirement" typeof="m8g:Requirement" resource="http://data.lblod.info/id/voorwaarden/3">
   <span property="m8g:isRequirementOf" resource="http://data.lblod.info/id/voorwaarden/1"></span>
   <span property="dct:type" value="https://data.vlaanderen.be/id/concept/VoorwaardeType/activiteit">
   <div property="dct:description" lang="nl">
     1) hetzij, voor <div property="ext:expectedValue" resource="http://data.lblod.info/id/voorwaarden/3/expectedvalue/1" typeof="skos:Concept">
-                  <span property="skos:prefLabel" language="nl">huisbezoek aan patiënten</span>
+                  <span property="skos:prefLabel" language="nl">werken uit te voeren</span>
                 ;</div>
   </div>
 </div>
@@ -391,60 +391,46 @@ Dan is er enkel een beschrijving van de voorwaarde.
 <p>Bij de aanvraag van deze vergunning moeten de volgende gegevens worden opgegeven en de
 volgende bewijsstukken worden gevoegd:</p>
 
-  a. voor de zorgverstrekker , vermeld in § 1, a.:
+  a. voor de ondernemer , vermeld in § 1:
 
     1) hetzij een
     <div about="http://data.lblod.info/id/voorwaarden/1">
       <div rev="m8g:hasEvidenceTypeList" typeof="m8g:EvidenceTypeList" resource="https://data.lblod.info.id/bewijstypelijst/1">
           <div property="m8g:specifiesEvidenceType" typeof="m8g:EvidenceType" resource="https://data.lblod.info/id/bewijstype/1">
-              <div property="m8g:evidenceTypeClassification" value="https://data.vlaanderen.be/id/concept/bewijstypeclassificatie/riziv-nummer">
-                <span property="skos:prefLabel" language="nl">RIZIV-nummer</span>;
+              <div property="m8g:evidenceTypeClassification" value="https://data.vlaanderen.be/id/concept/bewijstypeclassificatie/kbo-nummer">
+                <span property="skos:prefLabel" language="nl">KBO-nummer</span>;
               </div>
             </div>
       </div>
     </div>
 ```
 
-Opmerking: het RDFa attribuut "about" wordt gebruikt om het bewijsstuk aan een specifieke voorwaarde ("zorgverstrekker") toe te voegen.
+Opmerking: het RDFa attribuut "about" wordt gebruikt om het bewijsstuk aan een specifieke voorwaarde ("ondernemer") toe te voegen.
 
 TODO: codelijst bewijstypeclassificatie
 
 ### Bewijsstuk in combinatie met specifieke voorwaarde beschrijven
 
 ```
-  a. voor de zorgverstrekker , vermeld in § 1, a.:
+  a. voor de ondernemer , vermeld in § 1:
 
 <div property="belgif:hasRequirement" typeof="m8g:Requirement" resource="http://data.lblod.info/id/voorwaarden/3">
   <span property="m8g:isRequirementOf" resource="http://data.lblod.info/id/voorwaarden/1"></span>
   <span property="dct:type" value="https://data.vlaanderen.be/id/concept/VoorwaardeType/activiteit">
   <div property="dct:description" lang="nl">
-    1) hetzij, voor <div property="ext:expectedValue" resource="http://data.lblod.info/id/voorwaarden/3/expectedvalue/1" typeof="skos:Concept">
-                  <span property="skos:prefLabel" language="nl">huisbezoek aan patiënten</span>
-                ,</div>
-
-  <div rev="m8g:hasEvidenceTypeList" typeof="m8g:EvidenceTypeList" resource="http://data.lblod.info/id/voorwaarden/3/bewijstypelijst/1">
-        <div property="m8g:specifiesEvidenceType" typeof="m8g:EvidenceType" resource="http://data.lblod.info/id/voorwaarden/3/bewijstype/1">
-            <div property="m8g:evidenceTypeClassification" resource="https://data.vlaanderen.be/id/concept/bewijstypeclassificatie/visum-volksgezondheid" type="skos:Concept">
-              <span property="skos:prefLabel" language="nl">een visum van de Federale Overheidsdienst
-Volksgezondheid</span>
-            </div>
-        </div>
-  </div>
-
-  en/of
-
-  <div rev="m8g:hasEvidenceTypeList" typeof="m8g:EvidenceTypeList" resource="http://data.lblod.info/id/voorwaarden/3/bewijstypelijst/2">
-        <div property="m8g:specifiesEvidenceType" typeof="m8g:EvidenceType" resource="http://data.lblod.info/id/voorwaarden/3/bewijstype/2">
-            <div property="m8g:evidenceTypeClassification" resource="https://data.vlaanderen.be/id/concept/bewijstypeclassificatie/erkenning-beroep-gezondheidszorg" type="skos:Concept">
-              <span property="skos:prefLabel" language="nl">erkenning bij het Agentschap Zorg en Gezondheid, vereist om een
-beroep in de gezondheidszorg te mogen uitoefenen. In dit geval voegt de aanvrager ook
-een tewerkstellingsattest van de werkgever toe. Dit attest mag niet ouder zijn dan drie
-maanden</span>
-            </div>
-        </div>
-  </div>          
-.
-
+   <div rev="m8g:hasEvidenceTypeList" typeof="m8g:EvidenceTypeList" resource="http://data.lblod.info/id/voorwaarden/3/bewijstypelijst/1">
+          <div property="m8g:specifiesEvidenceType" typeof="m8g:EvidenceType" resource="http://data.lblod.info/id/voorwaarden/3/bewijstype/1">
+              <div property="m8g:evidenceTypeClassification" resource="https://data.vlaanderen.be/id/concept/bewijstypeclassificatie/actief-ondernemingsnummer" type="skos:Concept">
+                <span property="skos:prefLabel" language="nl">een actief ondernemingsnummer
+              </div>
+          </div>
+    </div>
+        met een KBO-NACEBEL code gekoppeld aan activiteiten,
+        die aantonen dat de onderneming:
+        (a) hetzij producten of diensten levert die van algemeen en openbaar belang zijn;
+        (b) hetzij waardetransporten organiseert;
+        ofwel een dienst van openbaar bestuur uitmaken
+ .
 </div>
 ```
 
@@ -463,7 +449,7 @@ Voorbeelden van kenmerken:
 
 Idee: kenmerken modelleren adhv een "Vergunningsprofiel" dat bestaat uit verschillende soorten kenmerken. Gelijkaardig aan de manier waarop participantkenmerken van een culturele activiteit worden gemodelleerd: https://data.vlaanderen.be/doc/applicatieprofiel/cultuurparticipatie/#Participantprofiel
 
-# Oude aanpak
+# Top-down
 
 ## Vergunningszone
 
@@ -471,9 +457,9 @@ Om een autoluwe zone te beschrijven, gebruiken we de klasse `Zone` en eigenschap
 
 ```
 <div prefix="besluit: http://data.vlaanderen.be/ns/besluit# mobiliteit: https://data.vlaanderen.be/ns/mobiliteit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/ dct: http://purl.org/dc/terms/">
-    <div typeof="mobiliteit:Zone" resource="https://data.gent.be/id/zone/x">
+    <div typeof="mobiliteit:Zone" resource="https://data.lblod.info/id/zone/x">
       <span property="rdfs:label">zone X</span>.
-      <div property="locn:geometry" typeof="locn:Geometry" resource="https://data.gent.be/id/zone/x/geometrie/1">
+      <div property="locn:geometry" typeof="locn:Geometry" resource="https://data.lblod.info/id/zone/x/geometrie/1">
 <span property="geosparql:asWKT" content="<http://www.opengis.net/def/crs/EPSG/0/31370> POINT(126306.58208223493 179948.9735279791)" datatype="geosparql:wktLiteral"></span>
       </div>
     </div>
@@ -483,9 +469,9 @@ Om een autoluwe zone te beschrijven, gebruiken we de klasse `Zone` en eigenschap
 Een voorwaarde met type `zone` kan naar deze zone vervolgens verwijzen:
 
 ```
-  <div typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/1">
+  <div typeof="m8g:Requirement" resource="https://data.lblod.info/id/voorwaarden/1">
     <span property="dct:type" value="https://data.vlaanderen.be/id/concept/voorwaarde/zone">Zone
-    <div property="prov:atLocation" typeof="https://data.vlaanderen.be/ns/mobiliteit#Zone" resource="https://data.gent.be/id/zone/x"> X
+    <div property="prov:atLocation" typeof="https://data.vlaanderen.be/ns/mobiliteit#Zone" resource="https://data.lblod.info/id/zone/x"> X
   </div>
 </div>
 ```
@@ -495,9 +481,9 @@ classDiagram
     autoluwe_zone_x --> autoluwe_zone_x_geometrie: geometrie (locn-geometry)
     voorwaarde_zone --> concept_zone: type (dct-type)
     voorwaarde_zone --> autoluwe_zone_x: geografischeDekking (prov-atLocation)
-    note for autoluwe_zone_x "URI: https:\/\/data.gent.be\/id\/zone\/x"
-    note for autoluwe_zone_x_geometrie "URI: https:\/\/data.gent.be\/id\/zone\/x\/geometrie\/1"
-    note for voorwaarde_zone "URI: https:\/\/data.gent.be\/id\/voorwaarden\/1"
+    note for autoluwe_zone_x "URI: https:\/\/data.lblod.info\/id\/zone\/x"
+    note for autoluwe_zone_x_geometrie "URI: https:\/\/data.lblod.info\/id\/zone\/x\/geometrie\/1"
+    note for voorwaarde_zone "URI: https:\/\/data.lblod.info\/id\/voorwaarden\/1"
     note for concept_zone "URI: https:\/\/data.vlaanderen.be\/id\/concept\/voorwaarde\/zone"
 
     class autoluwe_zone_x {
@@ -527,7 +513,7 @@ Om te beschrijven hoelang een vergunning geldig is, gebruiken we een `Voorwaarde
 ```
 <div prefix="besluit: http://data.vlaanderen.be/ns/besluit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/ schema: https://schema.org/ dct: http://purl.org/dc/terms/">
 Deze vergunning is 
-  <div typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/2">
+  <div typeof="m8g:Requirement" resource="https://data.lblod.info/id/voorwaarden/2">
     <span property="dct:type" resource="https://data.vlaanderen.be/id/concept/voorwaarde/periode"></span>
     <span property="schema:duration" value="P12M">12 maanden</span>
     geldig
@@ -538,7 +524,7 @@ Deze vergunning is
 ```mermaid
 classDiagram
     voorwaarde_periode --> concept_periode: type (dct-type)
-    note for voorwaarde_periode "URI: https:\/\/data.gent.be\/id\/voorwaarden\/2"
+    note for voorwaarde_periode "URI: https:\/\/data.lblod.info\/id\/voorwaarden\/2"
     note for concept_periode "URI: https:\/\/data.vlaanderen.be\/id\/concept\/voorwaarde\/periode"
     class voorwaarde_periode {
       a Voorwaarde (m8g:Requirement)
@@ -557,7 +543,7 @@ classDiagram
 ```
 <div prefix="besluit: http://data.vlaanderen.be/ns/besluit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/ schema: https://schema.org/ dct: http://purl.org/dc/terms/">
 De aanvraag moet   
-  <div typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/3">
+  <div typeof="m8g:Requirement" resource="https://data.lblod.info/id/voorwaarden/3">
     <span property="dct:type" resource="https://data.vlaanderen.be/id/concept/voorwaarde/motivatie">gemotiveerd</span>
   </div>
 worden.
@@ -567,7 +553,7 @@ worden.
 ```mermaid
 classDiagram
     voorwaarde_motivatie --> concept_motivatie: type (dct-type)
-    note for voorwaarde_motivatie "URI: https:\/\/data.gent.be\/id\/voorwaarden\/3"
+    note for voorwaarde_motivatie "URI: https:\/\/data.lblod.info\/id\/voorwaarden\/3"
     note for concept_motivatie "URI: https:\/\/data.vlaanderen.be\/id\/concept\/voorwaarde\/motivatie"
     class voorwaarde_motivatie {
       a Voorwaarde (m8g:Requirement)
@@ -592,25 +578,25 @@ Is een collectie van voorwaarden waarbij gekozen moet worden (OR) tussen volgend
 ```
 <div prefix="besluit: http://data.vlaanderen.be/ns/besluit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/ mit: https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang# schema: https://schema.org/ dct: http://purl.org/dc/terms/">
 De aanvrager moet aangeven
-<div typeof="mit:Voorwaardecollectie m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/4">
+<div typeof="mit:Voorwaardecollectie m8g:Requirement" resource="https://data.lblod.info/id/voorwaarden/4">
     <span property="dct:description">
         of een deelwagen gebruikt zal worden.
         <span property="mit:operatie" value="https://data.vlaanderen.be/id/concept/logischeOperatie/OR"></span>
-        <div property="m8g:hasRequirement" typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/5">
+        <div property="m8g:hasRequirement" typeof="m8g:Requirement" resource="https://data.lblod.info/id/voorwaarden/5">
             <span property="dct:type" resource="https://data.vlaanderen.be/id/concept/voorwaarde/gebruiktGeenDeelwagen"></span>
             <span property="dct:description>Ofwel wordt er geen deelvoertuig gebruikt.</span>
         </div>
-        <div property="m8g:hasRequirement" typeof="mit:Voorwaardecollectie m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/6">
+        <div property="m8g:hasRequirement" typeof="mit:Voorwaardecollectie m8g:Requirement" resource="https://data.lblod.info/id/voorwaarden/6">
             <span property="mit:operatie" value="https://data.vlaanderen.be/id/concept/logischeOperatie/AND"></span>
-            <div property="m8g:hasRequirement" typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/7">
+            <div property="m8g:hasRequirement" typeof="m8g:Requirement" resource="https://data.lblod.info/id/voorwaarden/7">
                 <span property="dct:type" resource="https://data.vlaanderen.be/id/concept/voorwaarde/gebruiktDeelwagen"></span>
                 <span property="dct:description>Ofwel wordt er wel een deelvoertuig gebruikt </span>
             </div>
-            <div property="m8g:hasRequirement" typeof="m8g:Requirement" resource="https://data.gent.be/id/voorwaarden/8">
+            <div property="m8g:hasRequirement" typeof="m8g:Requirement" resource="https://data.lblod.info/id/voorwaarden/8">
                 <span property="dct:type" resource="https://data.vlaanderen.be/id/concept/voorwaarde/deelwagenbewijs"></span>
                 <span property="dct:description>en wordt aangetoond met een document dat de aanvrager deze deelwagen gebruikt.</span>
-                <div property="m8g:hasEvidenceTypeList" typeof="m8g:EvidenceTypeList" resource="https://data.gent.be/id/bewijstypelijst/1">
-                    <div property="m8g:specifiesEvidenceType" typeof="m8g:EvidenceType" resource="https://data.gent.be/id/bewijstype/1">
+                <div property="m8g:hasEvidenceTypeList" typeof="m8g:EvidenceTypeList" resource="https://data.lblod.info/id/bewijstypelijst/1">
+                    <div property="m8g:specifiesEvidenceType" typeof="m8g:EvidenceType" resource="https://data.lblod.info/id/bewijstype/1">
                         <span property="m8g:evidenceTypeClassification" value="https://data.vlaanderen.be/id/concept/bewijstypeclassificatie/deelwagenbewijs"></span>
                     </div>
                 </div>
@@ -624,7 +610,7 @@ De aanvrager moet aangeven
 classDiagram
     voorwaardecollectie_deelwagen --> concept_deelwagen: type (dct-type)
     voorwaardecollectie_deelwagen --> voorwaarde_gebruiktGeenDeelwagen: heeftVoorwaarde (m8g-hasRequirement)
-    note for voorwaardecollectie_deelwagen "URI: https:\/\/data.gent.be\/id\/voorwaarden\/4"
+    note for voorwaardecollectie_deelwagen "URI: https:\/\/data.lblod.info\/id\/voorwaarden\/4"
     note for concept_deelwagen "URI: https:\/\/data.vlaanderen.be\/id\/concept\/voorwaarde\/deelwagen"
     class voorwaardecollectie_deelwagen {
       a Voorwaardecollectie (mit:Voorwaardecollectie)
@@ -635,7 +621,7 @@ classDiagram
       a Concept (skos:Concept)
       label (skos:prefLabel) "Al dan niet gebruik van deelwagen."
     }
-    note for voorwaarde_gebruiktGeenDeelwagen "URI: https:\/\/data.gent.be\/id\/voorwaarden\/5"
+    note for voorwaarde_gebruiktGeenDeelwagen "URI: https:\/\/data.lblod.info\/id\/voorwaarden\/5"
     voorwaarde_gebruiktGeenDeelwagen --> concept_gebruiktGeenDeelwagen: type (dct-type)
     class voorwaarde_gebruiktGeenDeelwagen {
         a Voorwaarde (m8g:Requirement)
@@ -646,7 +632,7 @@ classDiagram
       label (skos:prefLabel) "Aanvrager gebruikt geen deelwagen."
     }
 
-    note for voorwaardecollectie_gebruiktDeelwagen "URI: https:\/\/data.gent.be\/id\/voorwaarden\/6"
+    note for voorwaardecollectie_gebruiktDeelwagen "URI: https:\/\/data.lblod.info\/id\/voorwaarden\/6"
     class voorwaardecollectie_gebruiktDeelwagen {
       a Voorwaardecollectie (mit:Voorwaardecollectie)
       beschrijving (dct:description) "Ofwel wordt er wel een deelvoertuig gebruikt en wordt aangetoond met een document dat de aanvrager deze deelwagen gebruikt."
@@ -655,7 +641,7 @@ classDiagram
     voorwaardecollectie_deelwagen --> voorwaardecollectie_gebruiktDeelwagen: heeftVoorwaarde (m8g-hasRequirement)
 
     voorwaardecollectie_gebruiktDeelwagen --> voorwaarde_gebruiktDeelwagen: heeftVoorwaarde (m8g-hasRequirement)
-    note for voorwaarde_gebruiktDeelwagen "URI: https:\/\/data.gent.be\/id\/voorwaarden\/7"
+    note for voorwaarde_gebruiktDeelwagen "URI: https:\/\/data.lblod.info\/id\/voorwaarden\/7"
     voorwaarde_gebruiktDeelwagen --> concept_gebruiktDeelwagen: type (dct-type)
     class voorwaarde_gebruiktDeelwagen {
         a Voorwaarde (m8g:Requirement)
@@ -668,7 +654,7 @@ classDiagram
 
     voorwaardecollectie_gebruiktDeelwagen --> voorwaarde_deelwagenbewijs: heeftVoorwaarde (m8g-hasRequirement)
 
-    note for voorwaarde_deelwagenbewijs "URI: https:\/\/data.gent.be\/id\/voorwaarden\/8"
+    note for voorwaarde_deelwagenbewijs "URI: https:\/\/data.lblod.info\/id\/voorwaarden\/8"
     voorwaarde_deelwagenbewijs --> concept_deelwagenbewijs: type (dct-type)
     class voorwaarde_deelwagenbewijs {
         a Voorwaarde (m8g:Requirement)
@@ -679,12 +665,12 @@ classDiagram
       label (skos:prefLabel) "Aanvrager toont gebruik van deelwagen aan met document."
     }
     voorwaarde_deelwagenbewijs --> bewijstypelijst_deelwagenbewijs: heeftBewijstypelijst (m8g-hasEvidenceTypeList)
-    note for bewijstypelijst_deelwagenbewijs "URI: https:\/\/data.gent.be\/id\/bewijsttypelijst\/1"
+    note for bewijstypelijst_deelwagenbewijs "URI: https:\/\/data.lblod.info\/id\/bewijsttypelijst\/1"
     class bewijstypelijst_deelwagenbewijs {
         a Bewijstypelijst (m8g:EvidenceTypeList)
     }
     bewijstypelijst_deelwagenbewijs --> bewijstype_deelwagen: specifieertBewijstype (m8g-specifiesEvidenceType)
-    note for bewijstype_deelwagen "URI: https:\/\/data.gent.be\/id\/bewijstype\/1"
+    note for bewijstype_deelwagen "URI: https:\/\/data.lblod.info\/id\/bewijstype\/1"
     class bewijstype_deelwagen {
         a Bewijstype (m8g:EvidenceType)
     }
