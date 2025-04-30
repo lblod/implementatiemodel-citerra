@@ -302,7 +302,7 @@ where {
       <div property="belgif:hasRequirement" typeof="m8g:Requirement" resource="http://data.lblod.info/id/voorwaarden/1">
         <span property="dct:type" value="https://data.vlaanderen.be/id/concept/VoorwaardeType/activiteit">
         <div property="dct:description" lang="nl">
-            - a. <div property="ext:expectedValue" resource="http://data.lblod.info/id/dienstverlening/1/activiteit/1" typeof="skos:Concept">
+            - a. <div property="ext:expectedValue" resource="http://data.lblod.info/id/activiteiten/goederen-laden-en-lossen" typeof="skos:Concept">
                   <span property="skos:prefLabel" language="nl">goederen te laden en te lossen</span>
                 ;</div>
         </div>
@@ -310,7 +310,7 @@ where {
       <div property="belgif:hasRequirement" typeof="m8g:Requirement" resource="http://data.lblod.info/id/voorwaarden/2">
         <span property="dct:type" value="https://data.vlaanderen.be/id/concept/VoorwaardeType/activiteit">
         <div property="dct:description" lang="nl">
-            - b. <div property="ext:expectedValue" resource="http://data.lblod.info/id/dienstverlening/1/activiteit/2" typeof="skos:Concept">
+            - b. <div property="ext:expectedValue" resource="http://data.lblod.info/id/activiteiten/werken-uitvoeren" typeof="skos:Concept">
                 <span property="skos:prefLabel" language="nl">werken uit te voeren</span>
               .</div>
         </div>
@@ -370,7 +370,7 @@ Opmerking: het type van de specifieke voorwaarde is optioneel, wanneer deze niet
   <span property="m8g:isRequirementOf" resource="http://data.lblod.info/id/voorwaarden/1"></span>
   <span property="dct:type" value="https://data.vlaanderen.be/id/concept/VoorwaardeType/activiteit">
   <div property="dct:description" lang="nl">
-    1) hetzij, voor <div property="ext:expectedValue" resource="http://data.lblod.info/id/voorwaarden/3/expectedvalue/1" typeof="skos:Concept">
+    1) hetzij, voor <div property="ext:expectedValue" resource="http://data.lblod.info/id/activiteiten/werken-uitvoeren" typeof="skos:Concept">
                   <span property="skos:prefLabel" language="nl">werken uit te voeren</span>
                 ;</div>
   </div>
@@ -412,30 +412,45 @@ TODO: codelijst bewijstypeclassificatie
 ### Bewijsstuk in combinatie met specifieke voorwaarde beschrijven
 
 ```
-  a. voor de ondernemer , vermeld in § 1:
+Bij de aanvraag van deze vergunning moeten de volgende gegevens worden opgegeven en de
+volgende bewijsstukken worden gevoegd:
+
+  a. voor de ondernemer , vermeld in § 1, om
 
 <div property="belgif:hasRequirement" typeof="m8g:Requirement" resource="http://data.lblod.info/id/voorwaarden/3">
   <span property="m8g:isRequirementOf" resource="http://data.lblod.info/id/voorwaarden/1"></span>
   <span property="dct:type" value="https://data.vlaanderen.be/id/concept/VoorwaardeType/activiteit">
   <div property="dct:description" lang="nl">
+    1) hetzij, voor <div property="ext:expectedValue" resource="http://data.lblod.info/id/activiteiten/werken-uitvoeren" typeof="skos:Concept">
+                  <span property="skos:prefLabel" language="nl">werken uit te voeren</span>
+                </div>
+   </div>
+  :
    <div property="m8g:hasEvidenceTypeList" typeof="m8g:EvidenceTypeList" resource="http://data.lblod.info/id/voorwaarden/3/bewijstypelijst/1">
-          <div property="m8g:specifiesEvidenceType" typeof="m8g:EvidenceType" resource="http://data.lblod.info/id/voorwaarden/3/bewijstype/1">
-              <div property="m8g:evidenceTypeClassification" resource="https://data.vlaanderen.be/id/concept/bewijstypeclassificatie/actief-ondernemingsnummer" type="skos:Concept">
-                <span property="skos:prefLabel" language="nl">een actief ondernemingsnummer
-              </div>
+        <div property="m8g:specifiesEvidenceType" typeof="m8g:EvidenceType" resource="http://data.lblod.info/id/voorwaarden/3/bewijstype/1">
+          <div property="m8g:evidenceTypeClassification" resource="https://data.vlaanderen.be/id/concept/bewijstypeclassificatie/actief-ondernemingsnummer-algemeen-en-openbaar-belang" type="skos:Concept">
+                een actief ondernemingsnummer met een KBO-NACEBEL code gekoppeld aan activiteiten, die aantonen dat de onderneming producten of diensten levert die van algemeen en openbaar belang zijn
           </div>
+        </div>
     </div>
-        met een KBO-NACEBEL code gekoppeld aan activiteiten,
-        die aantonen dat de onderneming:
-        (a) hetzij producten of diensten levert die van algemeen en openbaar belang zijn;
-        (b) hetzij waardetransporten organiseert;
-        ofwel een dienst van openbaar bestuur uitmaken
- .
-</div>
+    <div property="m8g:hasEvidenceTypeList" typeof="m8g:EvidenceTypeList" resource="http://data.lblod.info/id/voorwaarden/3/bewijstypelijst/2">
+      <div property="m8g:specifiesEvidenceType" typeof="m8g:EvidenceType" resource="http://data.lblod.info/id/voorwaarden/3/bewijstype/1">
+        <div property="m8g:evidenceTypeClassification" resource="https://data.vlaanderen.be/id/concept/bewijstypeclassificatie/actief-ondernemingsnummer-waardetransporten" type="skos:Concept">
+                een actief ondernemingsnummer met een KBO-NACEBEL code gekoppeld aan activiteiten, die aantonen dat de onderneming waardetransporten organiseert
+        </div>
+      </div>
+    </div>
+    <div property="m8g:hasEvidenceTypeList" typeof="m8g:EvidenceTypeList" resource="http://data.lblod.info/id/voorwaarden/3/bewijstypelijst/2">
+      <div property="m8g:specifiesEvidenceType" typeof="m8g:EvidenceType" resource="http://data.lblod.info/id/voorwaarden/3/bewijstype/1">
+        <div property="m8g:evidenceTypeClassification" resource="https://data.vlaanderen.be/id/concept/bewijstypeclassificatie/actief-ondernemingsnummer-dienst-openbaar-bestuur" type="skos:Concept">
+           een actief ondernemingsnummer met een KBO-NACEBEL code gekoppeld aan activiteiten, die aantonen dat de onderneming met een dienst van openbaar bestuur uitmaken.
+        </div>
+      </div>
+    </div>
+  </div>
 ```
 
-TODO: te bekijken of we de complexiteit van verschillende bewijsstukken (en/of) willen modelleren
-
+Opmerking: EvidenceTypeList wordt gebruikt om een OF-constructe te maken. Dus elk bewijsstuk zit apart in een EvidenceTypeList en moet een op zichzelf staande zin vormen. 
 ## Kenmerken van toepassing op de selectie van voorwaarde
 
 Afhankelijk van de doelgroep, activiteit... zijn andere kenmerken van toepassing.
