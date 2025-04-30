@@ -395,7 +395,7 @@ volgende bewijsstukken worden gevoegd:</p>
 
     1) hetzij een
     <div about="http://data.lblod.info/id/voorwaarden/1">
-      <div rev="m8g:hasEvidenceTypeList" typeof="m8g:EvidenceTypeList" resource="https://data.lblod.info.id/bewijstypelijst/1">
+      <div property="m8g:hasEvidenceTypeList" typeof="m8g:EvidenceTypeList" resource="https://data.lblod.info.id/bewijstypelijst/1">
           <div property="m8g:specifiesEvidenceType" typeof="m8g:EvidenceType" resource="https://data.lblod.info/id/bewijstype/1">
               <div property="m8g:evidenceTypeClassification" value="https://data.vlaanderen.be/id/concept/bewijstypeclassificatie/kbo-nummer">
                 <span property="skos:prefLabel" language="nl">KBO-nummer</span>;
@@ -418,7 +418,7 @@ TODO: codelijst bewijstypeclassificatie
   <span property="m8g:isRequirementOf" resource="http://data.lblod.info/id/voorwaarden/1"></span>
   <span property="dct:type" value="https://data.vlaanderen.be/id/concept/VoorwaardeType/activiteit">
   <div property="dct:description" lang="nl">
-   <div rev="m8g:hasEvidenceTypeList" typeof="m8g:EvidenceTypeList" resource="http://data.lblod.info/id/voorwaarden/3/bewijstypelijst/1">
+   <div property="m8g:hasEvidenceTypeList" typeof="m8g:EvidenceTypeList" resource="http://data.lblod.info/id/voorwaarden/3/bewijstypelijst/1">
           <div property="m8g:specifiesEvidenceType" typeof="m8g:EvidenceType" resource="http://data.lblod.info/id/voorwaarden/3/bewijstype/1">
               <div property="m8g:evidenceTypeClassification" resource="https://data.vlaanderen.be/id/concept/bewijstypeclassificatie/actief-ondernemingsnummer" type="skos:Concept">
                 <span property="skos:prefLabel" language="nl">een actief ondernemingsnummer
