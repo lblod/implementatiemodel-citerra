@@ -78,6 +78,70 @@ Om een autoluwe zone te beschrijven, gebruiken we de klasse `Zone` en eigenschap
 
 TODO: straten annoteren
 
+# Parameters volgens Excel
+
+Momenteel worden de regels tot vergunning in een Excel beschreven. In deze Excel is elke regel (if-then) beschreven volgens een vast aantal parameters.
+
+Eerst beschrijven we de algemene structuur van de Excel en hoe een regel (combinatie van parameters) eruit ziet.
+Daarna leggen we uit hoe een regel beschreven wordt met een combinatie van VoorwaardeCollecties.
+Tot slot beschrijven we hoe de kolommen in de Excel (de parameters) vertaald worden naar Voorwaardes en hoe deze opgehaald kunnen worden binnen de combinatie van de VoorwaardeCollecties.
+
+## Structuur Excel
+
+De Excel is opgebouwd met volgende kolommen/parameters:
+* Type aanvrager
+* Relatie zone
+* Functie
+* Speciale toestand
+* Activiteit
+* Bewijs
+* Aantal zones
+* Duurtijd
+* Tijdsvenster
+* Aantal nummerplaten
+* Beheernummerplaten (niet relevant voor reglement)
+* Kostprijs
+
+Een regel kan er als volgt uitzien:
+IF Burger (type aanvrager) AND Geen vestiging in zone (relatie zone) AND Werf (Activiteit)
+THEN 1 zone (aantal zones) AND looptijd werf (duurtijd) AND 24/24 (tijdsvenster) AND 3 (aantal nummerplaten) AND 35 euro (kostprijs)
+
+Voor elke voorwaarde kan er optioneel een bewijsstuk verwacht worden. Bijvoorbeeld:
+Werf (Activiteit) verwacht een bewijsstuk Vergunning Inname openbaar domein.
+
+### Hierarchie van Voorwaardecollecties
+
+### Voorwaardes ophalen
+
+#### Type aanvrager
+
+```
+prefix mobiliteit: <https://data.vlaanderen.be/ns/mobiliteit#>
+prefix locn: <http://www.w3.org/ns/locn#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix geosparql: <http://www.opengis.net/ont/geosparql#>
+prefix sro: <https://data.vlaanderen.be/ns/slimmeraadpleegomgeving#>
+prefix dct: <http://purl.org/dc/terms/>
+prefix belgif: <http://vocab.belgif.be/ns/publicservice#>
+prefix ext: <http://mu.semte.ch/vocabularies/ext/>
+prefix cpsv: <http://purl.org/vocab/cpsv#>
+prefix m8g: <http://data.europa.eu/m8g/>
+prefix mit: <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#>
+
+select ?dienstverlening ?regel ?typeAanvrager
+where {
+ 
+}
+```
+
+```
+
+```
+
+### Regels ophalen op basis van geselecteerde voorwaarde
+
+
+
 # Bottom-up
 
 In deze nieuwe aanpak wordt er vanuit 2 insteken vertrokken:
