@@ -116,6 +116,7 @@ Een regel is een Voorwaardecollectie (AND) van parameters.
 Elke parameter beschouwen we als een Voorwaardecollectie (OR) ook al is er typisch maar 1 voorwaarde. Dit laat toe om makkelijk uit te breiden zonder impact op de afnemers van de data.
 
 Bijvoorbeeld:
+```
 Dienstverlening1 "De vergunning geldig voor een beperkte periode en voor één autovrij gebied".
 heeft Voorwaarde: RegelsVanDienstverlening1 (OR)
 
@@ -147,6 +148,7 @@ heeft Voorwaarde: VoorwaardeReden1VanRegel1
 VoorwaardeReden1VanRegel1 a Voorwaarde
 type Reden (of Functie / Speciale toestand / Activiteit)
 expectedValue "Werken"
+```
 
 ### Voorwaardes gebruiken in formulier
 
@@ -210,7 +212,36 @@ Aan de hand van ?regelVanDienstverlening kan in de volgende stappen makkelijker 
 #### 3. reden
 
 Op basis van vorige zoekopdracht op type aanvrager bekomen we een lijst van regels (?regelVanDienstverlening) die mogelijke kandidaten zijn.
-Hierop kan er nu verder gezocht worden naar mogelijke redenen om vergunning aan te vragen:
+In het voorbeeld hieronder zijn dit regels 1, 4 en 5.
+Van deze regels kunnen de mogelijke redenen om vergunning aan te vragen opgevraagd worden:
+
+```
+prefix cpsv: <http://purl.org/vocab/cpsv#>
+prefix m8g: <http://data.europa.eu/m8g/>
+prefix mit: <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#>
+prefix dct: <http://purl.org/dc/terms/>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix iceg-ps: <http://vocab.belgif.be/ns/publicservice#>
+
+select ?verwachtteWaarde ?regelVanDienstverlening
+where {
+  ?regelVanDienstverlening cpsv:hasRequirement ?parameterVanRegel .
+
+  ?parameterVanRegel cpsv:hasRequirement ?concreteParameterVanRegel .
+
+  ?concreteParameterVanRegel dct:type ?voorwaardeType ;
+                            m8g:hasConcept/mit:expressionOfExpectedValue ?verwachtteWaarde .
+
+  VALUES ?voorwaardeType { <https://data.vlaanderen.be/id/concept/VoorwaardeType/Reden> }
+  VALUES ?regelVanDienstverlening { <http://data.lblod.info/id/dienstverlening/1/regel/1>,  <http://data.lblod.info/id/dienstverlening/1/regel/4>, <http://data.lblod.info/id/dienstverlening/1/regel/5> }
+}
+```
+
+Het resultaat van ?verwachtteWaarde is bijvoorbeeld `http://data.vlaanderen.be/id/concept/Reden/Werken`.
+
+#### 4. Evt zone(s) selecteren
+
+Nadat een reden geselecteerd is door de gebruiker (bv. regel 4), is het eventueel nog nodig om zone(s) te selecteren.
 
 ```
 prefix cpsv: <http://purl.org/vocab/cpsv#>
@@ -229,14 +260,13 @@ where {
   ?concreteParameterVanRegel dct:type ?voorwaardeType ;
                             m8g:hasConcept/mit:expressionOfExpectedValue ?verwachtteWaarde .
 
-  VALUES ?voorwaardeType { <https://data.vlaanderen.be/id/concept/VoorwaardeType/Reden> }
-  VALUES ?regelVanDienstverlening { <http://data.lblod.info/id/dienstverlening/1/regel/1> }
+  VALUES ?voorwaardeType { <https://data.vlaanderen.be/id/concept/VoorwaardeType/Zone> }
+  VALUES ?regelVanDienstverlening { <http://data.lblod.info/id/dienstverlening/1/regel/4> }
 }
 ```
 
-4. Evt zone(s) selecteren
-
-
+Indien er een zone verwacht wordt, is het resultaat van ?verwachtteWaarde bijvoorbeeld `https://data.lblod.info/id/zone/1`.
+Zie [boven](## Definitie vergunningszone) om de waardes van de Zone op te vragen.
 
 # Bottom-up
 
