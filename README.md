@@ -157,32 +157,84 @@ Stel dat een formulier volgende flow aan de gebruiker voorstelt om te selecteren
 4. Evt zone(s) selecteren
 
 
-#### Type aanvrager
+#### 1. Gemeentes
+
+Vraag lijst van gemeentes op waar er een publieke dienstverlening van vergunning autoluwe zones is.
 
 ```
-prefix mobiliteit: <https://data.vlaanderen.be/ns/mobiliteit#>
-prefix locn: <http://www.w3.org/ns/locn#>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix geosparql: <http://www.opengis.net/ont/geosparql#>
-prefix sro: <https://data.vlaanderen.be/ns/slimmeraadpleegomgeving#>
-prefix dct: <http://purl.org/dc/terms/>
-prefix belgif: <http://vocab.belgif.be/ns/publicservice#>
-prefix ext: <http://mu.semte.ch/vocabularies/ext/>
 prefix cpsv: <http://purl.org/vocab/cpsv#>
 prefix m8g: <http://data.europa.eu/m8g/>
 prefix mit: <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#>
+prefix dct: <http://purl.org/dc/terms/>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
 
-select ?dienstverlening ?regel ?typeAanvrager
+select ?bestuurseenheidNaam ?dienstverlening
 where {
- 
+  ?dienstverlening a cpsv:PublicService ;
+                  m8g:hasCompetentAuthority/skos:prefLabel ?bestuurseenheidNaam ;
+                  mit:heeftOutputtype <http://data.vlaanderen.be/id/concept/PubliekeDienstverleningOutputCode/5ab0e9b8a3b2ca7c5e00001b> .
 }
 ```
 
-```
+#### 2. type aanvrager
 
 ```
+prefix cpsv: <http://purl.org/vocab/cpsv#>
+prefix m8g: <http://data.europa.eu/m8g/>
+prefix mit: <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#>
+prefix dct: <http://purl.org/dc/terms/>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix iceg-ps: <http://vocab.belgif.be/ns/publicservice#>
 
-### Regels ophalen op basis van geselecteerde voorwaarde
+select ?verwachtteWaarde ?regelVanDienstverlening
+where {
+  ?dienstverlening iceg-ps:hasRequirement ?regelsVanDienstverlening .
+
+  ?regelsVanDienstverlening cpsv:hasRequirement ?regelVanDienstverlening .
+
+  ?regelVanDienstverlening cpsv:hasRequirement ?parameterVanRegel .
+
+  ?parameterVanRegel cpsv:hasRequirement ?concreteParameterVanRegel .
+
+  ?concreteParameterVanRegel dct:type ?voorwaardeType ;
+                            m8g:hasConcept/mit:expressionOfExpectedValue ?verwachtteWaarde .
+
+  VALUES ?voorwaardeType { <https://data.vlaanderen.be/id/concept/VoorwaardeType/TypeAanvrager> }
+  VALUES ?dienstverlening { <http://data.lblod.info/id/dienstverlening/1> }
+}
+```
+
+Het resultaat van ?verwachtteWaarde is bijvoorbeeld `http://data.vlaanderen.be/id/concept/TypeAanvrager/ondernemer`.
+Aan de hand van ?regelVanDienstverlening kan in de volgende stappen makkelijker verder verfijnd worden.
+
+#### 3. reden
+
+Op basis van vorige zoekopdracht op type aanvrager bekomen we een lijst van regels (?regelVanDienstverlening) die mogelijke kandidaten zijn.
+Hierop kan er nu verder gezocht worden naar mogelijke redenen om vergunning aan te vragen:
+
+```
+prefix cpsv: <http://purl.org/vocab/cpsv#>
+prefix m8g: <http://data.europa.eu/m8g/>
+prefix mit: <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#>
+prefix dct: <http://purl.org/dc/terms/>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix iceg-ps: <http://vocab.belgif.be/ns/publicservice#>
+
+select ?verwachtteWaarde
+where {
+  ?regelVanDienstverlening cpsv:hasRequirement ?parameterVanRegel .
+
+  ?parameterVanRegel cpsv:hasRequirement ?concreteParameterVanRegel .
+
+  ?concreteParameterVanRegel dct:type ?voorwaardeType ;
+                            m8g:hasConcept/mit:expressionOfExpectedValue ?verwachtteWaarde .
+
+  VALUES ?voorwaardeType { <https://data.vlaanderen.be/id/concept/VoorwaardeType/Reden> }
+  VALUES ?regelVanDienstverlening { <http://data.lblod.info/id/dienstverlening/1/regel/1> }
+}
+```
+
+4. Evt zone(s) selecteren
 
 
 
