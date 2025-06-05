@@ -83,8 +83,8 @@ TODO: straten annoteren
 Momenteel worden de regels tot vergunning in een Excel beschreven. In deze Excel is elke regel (if-then) beschreven volgens een vast aantal parameters.
 
 Eerst beschrijven we de algemene structuur van de Excel en hoe een regel (combinatie van parameters) eruit ziet.
-Daarna leggen we uit hoe een regel beschreven wordt met een combinatie van VoorwaardeCollecties.
-Tot slot beschrijven we hoe de kolommen in de Excel (de parameters) vertaald worden naar Voorwaardes en hoe deze opgehaald kunnen worden binnen de combinatie van de VoorwaardeCollecties.
+Daarna leggen we uit hoe een regel beschreven wordt als een combinatie van VoorwaardeCollecties.
+Tot slot beschrijven we hoe een formulier deze Voorwaardecollecties kan gebruiken en verfijnen op basis van de gebruiker input.
 
 ## Structuur Excel
 
@@ -109,29 +109,53 @@ THEN 1 zone (aantal zones) AND looptijd werf (duurtijd) AND 24/24 (tijdsvenster)
 Voor elke voorwaarde kan er optioneel een bewijsstuk verwacht worden. Bijvoorbeeld:
 Werf (Activiteit) verwacht een Vergunning Inname openbaar domein (Bewijs).
 
-### Een regel als combinatie van Voorwaardecollecties
+### Excel regel als combinatie van Voorwaardecollecties
 
 De dienstverlening heeft een Voorwaardecollectie (OR) die de verzameling is van regels waaruit gekozen kan worden.
 Een regel is een Voorwaardecollectie (AND) van parameters.
 Elke parameter beschouwen we als een Voorwaardecollectie (OR) ook al is er typisch maar 1 voorwaarde. Dit laat toe om makkelijk uit te breiden zonder impact op de afnemers van de data.
 
 Bijvoorbeeld:
-Dienstverlening1 "De vergunning geldig voor één jaar en voor één autovrij gebied".
-heeft Voorwaarde: VoorwaardecollectieRegelsVanDienstverlening1 (OR)
+Dienstverlening1 "De vergunning geldig voor een beperkte periode en voor één autovrij gebied".
+heeft Voorwaarde: RegelsVanDienstverlening1 (OR)
 
-VoorwaardecollectieRegelsVanDienstverlening1 (OR)
-heeft Voorwaarde: VoorwaardecollectieRegel1VanDienstverlening1 (AND)
+RegelsVanDienstverlening1 a Voorwaardecollectie (OR)
+heeft Voorwaarde: Regel1VanDienstverlening1 (AND)
 
-VoorwaardecollectieRegel1VanDienstverlening1 (AND)
-heeft Voorwaarde: VoorwaardecollectieTypeAanvragerVanRegel1 (OR)
-heeft Voorwaarde: VoorwaardecollectieRelatieZoneVanRegel1 (OR)
-heeft Voorwaarde: VoorwaardecollectieRedenVanRegel1 (OR)
+Regel1VanDienstverlening1 a Voorwaardecollectie (AND)
+heeft Voorwaarde: TypeAanvragerVanRegel1 (OR)
+heeft Voorwaarde: RelatieZoneVanRegel1 (OR)
+heeft Voorwaarde: RedenVanRegel1 (OR)
 
+TypeAanvragerVanRegel1 Voorwaardecollectie (OR)
+heeft Voorwaarde: VoowaardeTypeAanvrager1VanRegel1
 
+VoowaardeTypeAanvrager1VanRegel1 a Voorwaarde
+type Aanvragertype
+expectedValue "Ondernemer"
 
+RelatieZoneVanRegel1 a Voorwaardecollectie (OR)
+heeft Voorwaarde: VoorwaardeRelatieZone1VanRegel1
 
+VoorwaardeRelatieZone1VanRegel1 a Voorwaarde
+type Zone
+expectedValue "Korenmarkt"
 
-### Voorwaardes ophalen
+RedenVanRegel1 a Voorwaardecollectie (OR)
+heeft Voorwaarde: VoorwaardeReden1VanRegel1
+
+VoorwaardeReden1VanRegel1 a Voorwaarde
+type Reden (of Functie / Speciale toestand / Activiteit)
+expectedValue "Werken"
+
+### Voorwaardes gebruiken in formulier
+
+Stel dat een formulier volgende flow aan de gebruiker voorstelt om te selecteren:
+1. gemeentes
+2. type aanvrager
+3. reden
+4. Evt zone(s) selecteren
+
 
 #### Type aanvrager
 
