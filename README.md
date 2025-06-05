@@ -107,9 +107,29 @@ IF Burger (type aanvrager) AND Geen vestiging in zone (relatie zone) AND Werf (A
 THEN 1 zone (aantal zones) AND looptijd werf (duurtijd) AND 24/24 (tijdsvenster) AND 3 (aantal nummerplaten) AND 35 euro (kostprijs)
 
 Voor elke voorwaarde kan er optioneel een bewijsstuk verwacht worden. Bijvoorbeeld:
-Werf (Activiteit) verwacht een bewijsstuk Vergunning Inname openbaar domein.
+Werf (Activiteit) verwacht een Vergunning Inname openbaar domein (Bewijs).
 
-### Hierarchie van Voorwaardecollecties
+### Een regel als combinatie van Voorwaardecollecties
+
+De dienstverlening heeft een Voorwaardecollectie (OR) die de verzameling is van regels waaruit gekozen kan worden.
+Een regel is een Voorwaardecollectie (AND) van parameters.
+Elke parameter beschouwen we als een Voorwaardecollectie (OR) ook al is er typisch maar 1 voorwaarde. Dit laat toe om makkelijk uit te breiden zonder impact op de afnemers van de data.
+
+Bijvoorbeeld:
+Dienstverlening1 "De vergunning geldig voor één jaar en voor één autovrij gebied".
+heeft Voorwaarde: VoorwaardecollectieRegelsVanDienstverlening1 (OR)
+
+VoorwaardecollectieRegelsVanDienstverlening1 (OR)
+heeft Voorwaarde: VoorwaardecollectieRegel1VanDienstverlening1 (AND)
+
+VoorwaardecollectieRegel1VanDienstverlening1 (AND)
+heeft Voorwaarde: VoorwaardecollectieTypeAanvragerVanRegel1 (OR)
+heeft Voorwaarde: VoorwaardecollectieRelatieZoneVanRegel1 (OR)
+heeft Voorwaarde: VoorwaardecollectieRedenVanRegel1 (OR)
+
+
+
+
 
 ### Voorwaardes ophalen
 
