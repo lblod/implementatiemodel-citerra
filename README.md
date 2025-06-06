@@ -111,42 +111,70 @@ Werf (Activiteit) verwacht een Vergunning Inname openbaar domein (Bewijs).
 
 ### Excel regel als combinatie van Voorwaardecollecties
 
-De dienstverlening heeft een Voorwaardecollectie (OR) die de verzameling is van regels waaruit gekozen kan worden.
-Een regel is een Voorwaardecollectie (AND) van parameters.
-Elke parameter beschouwen we als een Voorwaardecollectie (OR) ook al is er typisch maar 1 voorwaarde. Dit laat toe om makkelijk uit te breiden zonder impact op de afnemers van de data.
+De dienstverlening heeft een Voorwaardecollectie (OR) die de verzameling is van zone+regels waaruit gekozen kan worden.
+Als er regels gelden voor specifieke zone(s) kunnen deze dus hier aan toegevoegd worden zonder een nieuwe dienstverlening te moeten aanmaken.
+Een regel is een samenstelling van parameters zoals die in de Excel opgelijst wordt.
 
-Bijvoorbeeld:
+Schematisch ziet dit er als volgt uit
+
 ```
-Dienstverlening1 "De vergunning geldig voor een beperkte periode en voor één autovrij gebied".
-heeft Voorwaarde: RegelsVanDienstverlening1 (OR)
+Dienstverlening "vergunning autoluwe zone"
+OR Modaliteiten
+|--- AND "de vergunning geldig voor een beperkte periode en voor één autovrij gebied"
+      |--- OR Zones
+           |--- zone A
+           |--- zone B
+      |--- OR Regels
+          |--- AND Regel 1
+               |--- ondernemer
+               |--- levering
+               |--- duurtijd
+               |--- kostprijs
+          |--- AND Regel 2
+                |--- burger
+                |--- bezit garagebox
+                |--- ...
+|-- AND "de vergunning geldig voor één jaar en voor alle zones"
+```
 
-RegelsVanDienstverlening1 a Voorwaardecollectie (OR)
-heeft Voorwaarde: Regel1VanDienstverlening1 (AND)
+Volgens het OSLO model:
 
-Regel1VanDienstverlening1 a Voorwaardecollectie (AND)
-heeft Voorwaarde: TypeAanvragerVanRegel1 (OR)
-heeft Voorwaarde: RelatieZoneVanRegel1 (OR)
-heeft Voorwaarde: RedenVanRegel1 (OR)
+```
+Dienstverlening1 "vergunning autoluwe zone"
+heeftVoorwaarde: Modaliteiten (OR)
 
-TypeAanvragerVanRegel1 Voorwaardecollectie (OR)
-heeft Voorwaarde: VoowaardeTypeAanvrager1VanRegel1
+Modaliteiten a Voorwaardecollectie (OR)
+heeft Voorwaarde: GeldigVoorBeperktePeriodeEnEenAutovrijGebied (AND)
 
-VoowaardeTypeAanvrager1VanRegel1 a Voorwaarde
-type Aanvragertype
-expectedValue "Ondernemer"
+GeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaardecollectie (AND)
+heeftVoorwaarde ZonesVanGeldigVoorBeperktePeriodeEnEenAutovrijGebied (OR)
+heeftVoorwaarde RegelsVanGeldigVoorBeperktePeriodeEnEenAutovrijGebied (OR)
 
-RelatieZoneVanRegel1 a Voorwaardecollectie (OR)
-heeft Voorwaarde: VoorwaardeRelatieZone1VanRegel1
+ZonesVanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaardecollectie (OR)
+heeft Voorwaarde: ZoneVanZonesVanGeldigVoorBeperktePeriodeEnEenAutovrijGebied
 
-VoorwaardeRelatieZone1VanRegel1 a Voorwaarde
+ZoneVanZonesVanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaarde
 type Zone
 expectedValue "Korenmarkt"
 
-RedenVanRegel1 a Voorwaardecollectie (OR)
-heeft Voorwaarde: VoorwaardeReden1VanRegel1
+RegelsVanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaardecollectie (OR)
+heeft Voorwaarde: Regel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied (AND)
 
-VoorwaardeReden1VanRegel1 a Voorwaarde
-type Reden (of Functie / Speciale toestand / Activiteit)
+Regel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaardecollectie (AND)
+heeft Voorwaarde: TypeAanvragerVanRegel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied
+heeft Voorwaarde: RelatieZoneVanRegel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied
+heeft Voorwaarde: RedenVanRegel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied
+
+TypeAanvragerVanRegel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaarde
+type Type aanvrager
+expectedValue "Ondernemer"
+
+RelatieZoneVanRegel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaarde
+type Relatie Zone
+expectedValue "Geen vestiging of vestiging in zone"
+
+RedenVanRegel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaarde
+type Reden
 expectedValue "Werken"
 ```
 
