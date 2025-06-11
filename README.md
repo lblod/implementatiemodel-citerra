@@ -318,9 +318,9 @@ prefix iceg-ps: <http://vocab.belgif.be/ns/publicservice#>
 
 select ?zone ?zoneLabel ?zoneGeometrie
 where {
-  ?dienstverlening iceg-ps:hasRequirement/cpsv:hasRequirement/cpsv:hasRequirement cpsv:hasRequirement ?zoneVanRegel .
+  ?dienstverlening iceg-ps:hasRequirement/cpsv:hasRequirement/cpsv:hasRequirement/cpsv:hasRequirement ?zoneVanDienstverlening .
 
-  ?zoneVanRegel dct:type ?voorwaardeType ;
+  ?zoneVanDienstverlening dct:type ?voorwaardeType ;
                 m8g:hasConcept/m8g:expressionOfExpectedValue ?zone .
 
   ?zone rdfs:label ?zoneLabel .
