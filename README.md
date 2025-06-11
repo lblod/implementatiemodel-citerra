@@ -281,7 +281,7 @@ Het resultaat van ?reden is bijvoorbeeld de code voor levering `<https://data.vl
 
 #### 3. Gemeentes
 
-Vraag lijst van gemeentes op waar de regels van toepassing zijn:
+Vraag lijst van gemeentes op waar de regel (type aanvrager en reden) van toepassing is:
 
 ```
 prefix cpsv: <http://purl.org/vocab/cpsv#>
@@ -297,12 +297,16 @@ where {
                   cpsv:produces/dct:type <http://data.vlaanderen.be/id/concept/PubliekeDienstverleningOutputCode/5ab0e9b8a3b2ca7c5e00001b> .
 
   ?bestuurseenheid skos:prefLabel ?bestuurseenheidNaam .
+
+  ?dienstverlening iceg-ps:hasRequirement/cpsv:hasRequirement ?regelVanDienstverlening .
+
+  VALUES ?regelVanDienstverlening { <http://data.lblod.info/id/dienstverlening/1/regel/1>, <http://data.lblod.info/id/dienstverlening/3/regel/4> }
 }
 ```
 
-#### 4. Evt zone(s) selecteren
+#### 4. Zone(s) selecteren
 
-Nadat een reden geselecteerd is door de gebruiker (bv. regel 4), is het eventueel nog nodig om zone(s) te selecteren.
+Nadat een gemeente geselecteerd is door de gebruiker (en bijgevolg ook de dienstverlening die van toepassing is), is het eventueel nog nodig om een specifieke zone te selecteren.
 
 ```
 prefix cpsv: <http://purl.org/vocab/cpsv#>
@@ -312,37 +316,40 @@ prefix dct: <http://purl.org/dc/terms/>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix iceg-ps: <http://vocab.belgif.be/ns/publicservice#>
 
-select ?verwachtteWaarde
+select ?zone ?zoneLabel ?zoneGeometrie
 where {
-  ?regelVanDienstverlening cpsv:hasRequirement ?parameterVanRegel .
+  ?dienstverlening iceg-ps:hasRequirement/cpsv:hasRequirement/cpsv:hasRequirement cpsv:hasRequirement ?zoneVanRegel .
 
-  ?parameterVanRegel cpsv:hasRequirement ?concreteParameterVanRegel .
+  ?zoneVanRegel dct:type ?voorwaardeType ;
+                m8g:hasConcept/m8g:expressionOfExpectedValue ?zone .
 
-  ?concreteParameterVanRegel dct:type ?voorwaardeType ;
-                            m8g:hasConcept/mit:expressionOfExpectedValue ?verwachtteWaarde .
+  ?zone rdfs:label ?zoneLabel .
 
-  VALUES ?voorwaardeType { <https://data.vlaanderen.be/id/concept/VoorwaardeType/Zone> }
+  OPTIONAL {
+    ?zone locn:geometry ?zoneGeometrie ;
+  }
+
+  VALUES ?voorwaardeType { <https://data.vlaanderen.be/id/concept/IntelligenteToegang-TypeVoorwaarde/d5c0c89a-3ba4-49fd-bfe4-f41405b4cbf1> }
   VALUES ?regelVanDienstverlening { <http://data.lblod.info/id/dienstverlening/1/regel/4> }
 }
 ```
 
-Indien er een zone verwacht wordt, is het resultaat van ?verwachtteWaarde bijvoorbeeld `https://data.lblod.info/id/zone/1`.
-Zie [boven](## Definitie vergunningszone) om de waardes van de Zone op te vragen.
+# DEPRECATED
 
-# Bottom-up
+## Bottom-up
 
 In deze nieuwe aanpak wordt er vanuit 2 insteken vertrokken:
 - welke informatie (query) moet een formulier kunnen opvragen om het formulier te kunnen opbouwen
 - hoe kunnen we het reglement annoteren op zodanige manier dat de originele opbouw van de tekst behouden blijft (geen datamodel push, wat in de oude aanpak onderaan wel het geval is met AND/OR constructies)
 
-## Vergunningszone
+### Vergunningszone
 
 * In welke zones is er een dienstverlening "vergunning autoluwe zone" van toepassing?
 
 Zones kunnen op twee manieren gekoppeld worden aan de dienstverlening (vergunning).
 Enerzijds impliciet wanneer deze eenmalig bovenaan het reglement (of in bijlage) wordt beschreven, anderzijds expliciet wanneer de zones opgelijst staan in het artikel/hoofdstuk van de dienstverlening.
 
-### Impliciet
+#### Impliciet
 
 In een reglement worden zones typisch bovenaan eenmalig gedefinieerd, zoals definities.
 Deze zones zijn dan impliciet van toepassing bij de beschrijving van de dienstverlening.
@@ -442,7 +449,7 @@ Volgende straten worden voorzien van een verkeersbord F103, al dan niet met een 
 </body>
 ```
 
-### Expliciet
+#### Expliciet
 
 Wanneer de zone expliciet benoemd wordt bij de dienstverlening, beschrijven we de zone als een voorwaarde met type `zone` en een relatie naar een Zone-object:
 
@@ -476,7 +483,7 @@ Wanneer de zone expliciet benoemd wordt bij de dienstverlening, beschrijven we d
 
 TODO: OSLO Intelligente toegang vocabularium uitbreiden met term om rechtstreeks van een Requirement de te verwachten waarde te beschrijven. Momenteel "ext:expectedValue". In CCCEV is het enkel mogelijk om via Information Concept de expected value te beschrijven, en moet via een "regel"-taal gebeuren (RIF, SHACL...). Om 1 specifieke waarde aan te duiden is dit dus overkill.
 
-## Algemene voorwaarden
+### Algemene voorwaarden
 
 * Welke doelgroepen komen in aanmerking voor een vergunning?
 
@@ -570,7 +577,7 @@ where {
 ```
 
 
-## Specifieke voorwaarden
+### Specifieke voorwaarden
 
 * Welke voorwaarden zijn er specifiek voor deze voorwaarde (doelgroep)?
 
@@ -631,12 +638,12 @@ Opmerking: het type van de specifieke voorwaarde is optioneel, wanneer deze niet
 Het beschrijven van de verwachte waarde aan de hand van een codelijst kan optioneel zijn.
 Dan is er enkel een beschrijving van de voorwaarde.
 
-## Bewijsstukken
+### Bewijsstukken
 
 
 * Welk(e) bewijsstuk(ken) zijn nodig om aan te tonen dat een voorwaarde voldaan is?
 
-### Bewijsstuk aan 1 voorwaarde hangen
+#### Bewijsstuk aan 1 voorwaarde hangen
 
 ```
 <p>Bij de aanvraag van deze vergunning moeten de volgende gegevens worden opgegeven en de
@@ -660,7 +667,7 @@ Opmerking: het RDFa attribuut "about" wordt gebruikt om het bewijsstuk aan een s
 
 TODO: codelijst bewijstypeclassificatie
 
-### Bewijsstuk in combinatie met specifieke voorwaarde beschrijven
+#### Bewijsstuk in combinatie met specifieke voorwaarde beschrijven
 
 ```
 Bij de aanvraag van deze vergunning moeten de volgende gegevens worden opgegeven en de
@@ -702,7 +709,7 @@ volgende bewijsstukken worden gevoegd:
 ```
 
 Opmerking: EvidenceTypeList wordt gebruikt om een OF-constructe te maken. Dus elk bewijsstuk zit apart in een EvidenceTypeList en moet een op zichzelf staande zin vormen. 
-## Kenmerken van toepassing op de selectie van voorwaarde
+### Kenmerken van toepassing op de selectie van voorwaarde
 
 Afhankelijk van de doelgroep, activiteit... zijn andere kenmerken van toepassing.
 
@@ -715,9 +722,9 @@ Voorbeelden van kenmerken:
 
 Idee: kenmerken modelleren adhv een "Vergunningsprofiel" dat bestaat uit verschillende soorten kenmerken. Gelijkaardig aan de manier waarop participantkenmerken van een culturele activiteit worden gemodelleerd: https://data.vlaanderen.be/doc/applicatieprofiel/cultuurparticipatie/#Participantprofiel
 
-# Top-down
+## Top-down
 
-## Vergunningszone
+### Vergunningszone
 
 Om een autoluwe zone te beschrijven, gebruiken we de klasse `Zone` en eigenschappen `naam` en `geometrie`.
 
@@ -772,7 +779,7 @@ classDiagram
 Het kan wenselijk zijn om zones in een ander (GIS) systeem te beheren.
 Te bekijken of [heeftMeerInfo](https://data.vlaanderen.be/doc/applicatieprofiel/slimmeraadpleegomgeving/#Stuk%3AheeftMeerInfo) voldoende is om het reglement te laten wijzen naar een pagina met meer info over de zones.
 
-## Periode
+### Periode
 
 Om te beschrijven hoelang een vergunning geldig is, gebruiken we een `Voorwaarde` met type `periode` en eigenschap `duur` (`https://schema.org/duration`). Duur wordt uitgedrukt als een interval volgens iso 8601, bv P1D 1 dag, P12M 12 maanden...	
 
@@ -802,9 +809,9 @@ classDiagram
     }
 ```
 
-## Extra info
+### Extra info
 
-### Motivatie
+#### Motivatie
 
 ```
 <div prefix="besluit: http://data.vlaanderen.be/ns/besluit# eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# adres: https://data.vlaanderen.be/ns/adres# locn: http://www.w3.org/ns/locn# rdfs: http://www.w3.org/2000/01/rdf-schema# geosparql: http://www.opengis.net/ont/geosparql# m8g: http://data.europa.eu/m8g/ schema: https://schema.org/ dct: http://purl.org/dc/terms/">
@@ -831,7 +838,7 @@ classDiagram
     }
 ```
 
-### Deelwagen
+#### Deelwagen
 
 Voorwaarde dat het gebruik van een deelwagen nagaat.
 
