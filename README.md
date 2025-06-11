@@ -128,8 +128,9 @@ OR Modaliteiten
           |--- AND Regel 1
                |--- ondernemer
                |--- levering
+               |--- tijdsvenster
                |--- duurtijd
-               |--- kostprijs
+               |--- ...
           |--- AND Regel 2
                 |--- burger
                 |--- bezit garagebox
@@ -156,7 +157,7 @@ heeft Voorwaarde: Zone1VanZonesVanGeldigVoorBeperktePeriodeEnEenAutovrijGebied
 heeft Voorwaarde: Zone2VanZonesVanGeldigVoorBeperktePeriodeEnEenAutovrijGebied
 
 Zone1VanZonesVanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaarde
-type Voorwaarde - In Zone
+type In Zone
 expectedValue "Korenmarkt"
 
 Zone2VanZonesVanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaarde
@@ -170,18 +171,49 @@ Regel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaardecollectie (AND
 heeft Voorwaarde: TypeAanvragerVanRegel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied
 heeft Voorwaarde: RelatieZoneVanRegel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied
 heeft Voorwaarde: RedenVanRegel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied
+heeft Voorwaarde: TijdsvensterVanRegel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied
+heeft Voorwaarde: DuurtijdVanRegel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied
 
 TypeAanvragerVanRegel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaarde
 type Type aanvrager
-expectedValue "Ondernemer"
+heeftConcept OndernemerConcept
+
+OndernemerConcept a InformatieConcept
+expressieVanVerwachteWaarde "Ondernemer"
 
 RelatieZoneVanRegel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaarde
 type Relatie Zone
-expectedValue "Geen vestiging of vestiging in zone"
+heeftConcept GeenVestigingOfVestigingInZoneConcept
+
+GeenVestigingOfVestigingInZoneConcept a InformatieConcept
+expressieVanVerwachteWaarde "Geen vestiging of vestiging in zone"
 
 RedenVanRegel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaarde
 type Reden
-expectedValue "Werken"
+heeftConcept WerkenConcept
+
+WerkenConcept a InformatieConcept 
+expressieVanVerwachteWaarde "Werken"
+
+TijdsvensterVanRegel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaarde
+type Tijdsvenster
+heeftConcept DagUrenConceptTussen8hEn17h
+
+DagUrenConceptTussen8hEn17h a InformatieConcept
+type "Dag uren"
+expressieVanVerwachteWaarde DagurenVanTijdsvensterVanRegel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied
+
+DagurenVanTijdsvensterVanRegel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a OpeninghoursSpecification
+opens: "08:00:00"
+closes: "17:00:00"
+
+DuurtijdVanRegel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaarde
+type Duurtijd
+heeftConcept LangeDuurtijdConceptVan365dagen
+
+LangeDuurtijdConceptVan365dagen a InformatieConcept
+type "Lange duurtijd"
+expressieVanVerwachteWaarde "P365D"
 ```
 
 ### Voorwaardes gebruiken in formulier
