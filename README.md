@@ -145,17 +145,23 @@ heeftVoorwaarde: Modaliteiten (OR)
 
 Modaliteiten a Voorwaardecollectie (OR)
 heeft Voorwaarde: GeldigVoorBeperktePeriodeEnEenAutovrijGebied (AND)
+heeft Voorwaarde: GeldigVoorEenJaarEnVoorAlleZones (AND)
 
 GeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaardecollectie (AND)
 heeftVoorwaarde ZonesVanGeldigVoorBeperktePeriodeEnEenAutovrijGebied (OR)
 heeftVoorwaarde RegelsVanGeldigVoorBeperktePeriodeEnEenAutovrijGebied (OR)
 
 ZonesVanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaardecollectie (OR)
-heeft Voorwaarde: ZoneVanZonesVanGeldigVoorBeperktePeriodeEnEenAutovrijGebied
+heeft Voorwaarde: Zone1VanZonesVanGeldigVoorBeperktePeriodeEnEenAutovrijGebied
+heeft Voorwaarde: Zone2VanZonesVanGeldigVoorBeperktePeriodeEnEenAutovrijGebied
 
-ZoneVanZonesVanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaarde
-type Zone
+Zone1VanZonesVanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaarde
+type Voorwaarde - In Zone
 expectedValue "Korenmarkt"
+
+Zone2VanZonesVanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaarde
+type In Zone
+expectedValue "Vlasmarkt"
 
 RegelsVanGeldigVoorBeperktePeriodeEnEenAutovrijGebied a Voorwaardecollectie (OR)
 heeft Voorwaarde: Regel1VanGeldigVoorBeperktePeriodeEnEenAutovrijGebied (AND)
@@ -181,32 +187,12 @@ expectedValue "Werken"
 ### Voorwaardes gebruiken in formulier
 
 Stel dat een formulier volgende flow aan de gebruiker voorstelt om te selecteren:
-1. gemeentes
-2. type aanvrager
-3. reden
+1. type aanvrager
+2. reden
+3. gemeentes
 4. Evt zone(s) selecteren
 
-
-#### 1. Gemeentes
-
-Vraag lijst van gemeentes op waar er een publieke dienstverlening van vergunning autoluwe zones is.
-
-```
-prefix cpsv: <http://purl.org/vocab/cpsv#>
-prefix m8g: <http://data.europa.eu/m8g/>
-prefix mit: <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#>
-prefix dct: <http://purl.org/dc/terms/>
-prefix skos: <http://www.w3.org/2004/02/skos/core#>
-
-select ?bestuurseenheidNaam ?dienstverlening
-where {
-  ?dienstverlening a cpsv:PublicService ;
-                  m8g:hasCompetentAuthority/skos:prefLabel ?bestuurseenheidNaam ;
-                  mit:heeftOutputtype <http://data.vlaanderen.be/id/concept/PubliekeDienstverleningOutputCode/5ab0e9b8a3b2ca7c5e00001b> .
-}
-```
-
-#### 2. type aanvrager
+#### 1. type aanvrager
 
 ```
 prefix cpsv: <http://purl.org/vocab/cpsv#>
@@ -237,7 +223,7 @@ where {
 Het resultaat van ?verwachtteWaarde is bijvoorbeeld `http://data.vlaanderen.be/id/concept/TypeAanvrager/ondernemer`.
 Aan de hand van ?regelVanDienstverlening kan in de volgende stappen makkelijker verder verfijnd worden.
 
-#### 3. reden
+#### 2. reden
 
 Op basis van vorige zoekopdracht op type aanvrager bekomen we een lijst van regels (?regelVanDienstverlening) die mogelijke kandidaten zijn.
 In het voorbeeld hieronder zijn dit regels 1, 4 en 5.
@@ -266,6 +252,25 @@ where {
 ```
 
 Het resultaat van ?verwachtteWaarde is bijvoorbeeld `http://data.vlaanderen.be/id/concept/Reden/Werken`.
+
+#### 3. Gemeentes
+
+Vraag lijst van gemeentes op waar er een publieke dienstverlening van vergunning autoluwe zones is.
+
+```
+prefix cpsv: <http://purl.org/vocab/cpsv#>
+prefix m8g: <http://data.europa.eu/m8g/>
+prefix mit: <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#>
+prefix dct: <http://purl.org/dc/terms/>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+select ?bestuurseenheidNaam ?dienstverlening
+where {
+  ?dienstverlening a cpsv:PublicService ;
+                  m8g:hasCompetentAuthority/skos:prefLabel ?bestuurseenheidNaam ;
+                  mit:heeftOutputtype <http://data.vlaanderen.be/id/concept/PubliekeDienstverleningOutputCode/5ab0e9b8a3b2ca7c5e00001b> .
+}
+```
 
 #### 4. Evt zone(s) selecteren
 
