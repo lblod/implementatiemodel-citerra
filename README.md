@@ -223,6 +223,7 @@ Een aanvraagformulier wordt verondersteld volgende flow aan de aanvrager voor te
 2. reden
 3. gemeentes
 4. zone(s) selecteren (optioneel)
+5. Oplijsting van alle voorwaardes op basis van vorige stappen: welke bewijsstukken, duurtijd, tijdsvenster
 
 #### 1. type aanvrager
 
@@ -254,9 +255,7 @@ Aan de hand van ?regelVanDienstverlening kan in de volgende stappen verder gefil
 
 #### 2. reden
 
-Op basis van vorige zoekopdracht op type aanvrager bekomen we een lijst van regels (?regelVanDienstverlening) die mogelijke kandidaten zijn.
-In het voorbeeld hieronder zijn dit regels 1, 4 en 5.
-Van deze regels kunnen de mogelijke redenen om vergunning aan te vragen opgevraagd worden:
+Op basis van de gevonden regels (?regelVanDienstverlening) kunnen we de mogelijke redenen om vergunning aan te vragen opvragen:
 
 ```
 prefix cpsv: <http://purl.org/vocab/cpsv#>
@@ -266,25 +265,23 @@ prefix dct: <http://purl.org/dc/terms/>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix iceg-ps: <http://vocab.belgif.be/ns/publicservice#>
 
-select ?verwachtteWaarde ?regelVanDienstverlening
+select ?regelVanDienstverlening ?reden
 where {
-  ?regelVanDienstverlening cpsv:hasRequirement ?parameterVanRegel .
+  ?regelVanDienstverlening cpsv:hasRequirement ?redenVanDienstverlening .
 
-  ?parameterVanRegel cpsv:hasRequirement ?concreteParameterVanRegel .
+  ?redenVanDienstverlening dct:type ?voorwaardeType ;
+                            m8g:hasConcept/m8g:expressionOfExpectedValue ?reden .
 
-  ?concreteParameterVanRegel dct:type ?voorwaardeType ;
-                            m8g:hasConcept/mit:expressionOfExpectedValue ?verwachtteWaarde .
-
-  VALUES ?voorwaardeType { <https://data.vlaanderen.be/id/concept/VoorwaardeType/Reden> }
+  VALUES ?voorwaardeType { <https://data.vlaanderen.be/id/concept/IntelligenteToegang-TypeVoorwaarde/0bfeab4c-a69b-44cd-9a2c-6fd18ebd5761> }
   VALUES ?regelVanDienstverlening { <http://data.lblod.info/id/dienstverlening/1/regel/1>,  <http://data.lblod.info/id/dienstverlening/1/regel/4>, <http://data.lblod.info/id/dienstverlening/1/regel/5> }
 }
 ```
 
-Het resultaat van ?verwachtteWaarde is bijvoorbeeld `http://data.vlaanderen.be/id/concept/Reden/Werken`.
+Het resultaat van ?reden is bijvoorbeeld de code voor levering `<https://data.vlaanderen.be/id/concept/IntelligenteToegang-Reden/abb5e6ab-20cc-46a9-b5c7-5fcd69f5a4ec>` of laden/lossen: `https://data.vlaanderen.be/id/concept/IntelligenteToegang-Reden/db9f68b3-b4f9-4a7c-955f-dacb787aecb8`
 
 #### 3. Gemeentes
 
-Vraag lijst van gemeentes op waar er een publieke dienstverlening van vergunning autoluwe zones is.
+Vraag lijst van gemeentes op waar de regels van toepassing zijn:
 
 ```
 prefix cpsv: <http://purl.org/vocab/cpsv#>
@@ -296,8 +293,10 @@ prefix skos: <http://www.w3.org/2004/02/skos/core#>
 select ?bestuurseenheidNaam ?dienstverlening
 where {
   ?dienstverlening a cpsv:PublicService ;
-                  m8g:hasCompetentAuthority/skos:prefLabel ?bestuurseenheidNaam ;
+                  m8g:hasCompetentAuthority ?bestuurseenheid ;
                   mit:heeftOutputtype <http://data.vlaanderen.be/id/concept/PubliekeDienstverleningOutputCode/5ab0e9b8a3b2ca7c5e00001b> .
+
+  ?bestuurseenheid skos:prefLabel ?bestuurseenheidNaam ;
 }
 ```
 
