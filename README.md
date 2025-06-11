@@ -238,7 +238,7 @@ prefix iceg-ps: <http://vocab.belgif.be/ns/publicservice#>
 select ?dienstverlening ?regelVanDienstverlening ?typeAanvrager
 where {
   ?dienstverlening a cpsv:PublicService ;
-                  mit:heeftOutputtype <https://data.vlaanderen.be/id/concept/IntelligenteToegang-LogischeOperatie/b0acbdf0-5dc7-4546-9265-7c3c6bb19da2> .
+                   cpsv:produces/dct:type <https://data.vlaanderen.be/id/concept/IntelligenteToegang-LogischeOperatie/b0acbdf0-5dc7-4546-9265-7c3c6bb19da2> .
 
   ?dienstverlening iceg-ps:hasRequirement/cpsv:hasRequirement ?regelVanDienstverlening .
   ?regelVanDienstverlening cpsv:hasRequirement ?typeAanvragerVanDienstverlening .
@@ -290,13 +290,13 @@ prefix mit: <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#>
 prefix dct: <http://purl.org/dc/terms/>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 
-select ?bestuurseenheidNaam ?dienstverlening
+select ?bestuurseenheidUri ?bestuurseenheidNaam ?dienstverlening
 where {
   ?dienstverlening a cpsv:PublicService ;
-                  m8g:hasCompetentAuthority ?bestuurseenheid ;
-                  mit:heeftOutputtype <http://data.vlaanderen.be/id/concept/PubliekeDienstverleningOutputCode/5ab0e9b8a3b2ca7c5e00001b> .
+                  m8g:hasCompetentAuthority ?bestuurseenheidUri ;
+                  cpsv:produces/dct:type <http://data.vlaanderen.be/id/concept/PubliekeDienstverleningOutputCode/5ab0e9b8a3b2ca7c5e00001b> .
 
-  ?bestuurseenheid skos:prefLabel ?bestuurseenheidNaam ;
+  ?bestuurseenheid skos:prefLabel ?bestuurseenheidNaam .
 }
 ```
 
