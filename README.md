@@ -218,11 +218,11 @@ expressieVanVerwachteWaarde "P365D"
 
 ### Voorwaardes gebruiken in formulier
 
-Stel dat een formulier volgende flow aan de gebruiker voorstelt om te selecteren:
+Een aanvraagformulier wordt verondersteld volgende flow aan de aanvrager voor te stellen:
 1. type aanvrager
 2. reden
 3. gemeentes
-4. Evt zone(s) selecteren
+4. zone(s) selecteren (optioneel)
 
 #### 1. type aanvrager
 
@@ -234,26 +234,23 @@ prefix dct: <http://purl.org/dc/terms/>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix iceg-ps: <http://vocab.belgif.be/ns/publicservice#>
 
-select ?verwachtteWaarde ?regelVanDienstverlening
+select ?dienstverlening ?regelVanDienstverlening ?typeAanvrager
 where {
-  ?dienstverlening iceg-ps:hasRequirement ?regelsVanDienstverlening .
+  ?dienstverlening a cpsv:PublicService ;
+                  mit:heeftOutputtype <https://data.vlaanderen.be/id/concept/IntelligenteToegang-LogischeOperatie/b0acbdf0-5dc7-4546-9265-7c3c6bb19da2> .
 
-  ?regelsVanDienstverlening cpsv:hasRequirement ?regelVanDienstverlening .
+  ?dienstverlening iceg-ps:hasRequirement/cpsv:hasRequirement ?regelVanDienstverlening .
+  ?regelVanDienstverlening cpsv:hasRequirement ?typeAanvragerVanDienstverlening .
 
-  ?regelVanDienstverlening cpsv:hasRequirement ?parameterVanRegel .
+  ?typeAanvragerVanDienstverlening dct:type ?voorwaardeType ;
+                            m8g:hasConcept/m8g:expressionOfExpectedValue ?typeAanvrager .
 
-  ?parameterVanRegel cpsv:hasRequirement ?concreteParameterVanRegel .
-
-  ?concreteParameterVanRegel dct:type ?voorwaardeType ;
-                            m8g:hasConcept/mit:expressionOfExpectedValue ?verwachtteWaarde .
-
-  VALUES ?voorwaardeType { <https://data.vlaanderen.be/id/concept/VoorwaardeType/TypeAanvrager> }
-  VALUES ?dienstverlening { <http://data.lblod.info/id/dienstverlening/1> }
+  VALUES ?voorwaardeType { <https://data.vlaanderen.be/id/concept/IntelligenteToegang-TypeVoorwaarde/0d903f9f-730b-45ed-9f04-d2449d7a8018> }
 }
 ```
 
-Het resultaat van ?verwachtteWaarde is bijvoorbeeld `http://data.vlaanderen.be/id/concept/TypeAanvrager/ondernemer`.
-Aan de hand van ?regelVanDienstverlening kan in de volgende stappen makkelijker verder verfijnd worden.
+Het resultaat van ?typeAanvrager is bijvoorbeeld de code voor Ondernemer: `https://data.vlaanderen.be/id/concept/IntelligenteToegang-TypeAanvrager/1738bdf1-f067-4084-9220-7748a6ae499f`.
+Aan de hand van ?regelVanDienstverlening kan in de volgende stappen verder gefilterd en de andere voorwaarden opgehaald worden.
 
 #### 2. reden
 
