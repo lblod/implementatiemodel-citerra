@@ -345,6 +345,7 @@ prefix mit: <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#>
 prefix dct: <http://purl.org/dc/terms/>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix iceg-ps: <http://vocab.belgif.be/ns/publicservice#>
+prefix schema: <http://schema.org/>
 
 select ?regelVanDienstverlening ?voorwaardeVanRegel ?type ?beschrijving ?value ?opens ?closes ?bewijstypeclassificatietype
 where {
