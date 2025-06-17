@@ -318,6 +318,8 @@ prefix iceg-ps: <http://vocab.belgif.be/ns/publicservice#>
 
 select ?zone ?zoneLabel ?zoneGeometrie
 where {
+  ?dienstverlening iceg-ps:hasRequirement/cpsv:hasRequirement ?regelVanDienstverlening .
+
   ?dienstverlening iceg-ps:hasRequirement/cpsv:hasRequirement/cpsv:hasRequirement/cpsv:hasRequirement ?zoneVanDienstverlening .
 
   ?zoneVanDienstverlening dct:type ?voorwaardeType ;
@@ -330,6 +332,42 @@ where {
   }
 
   VALUES ?voorwaardeType { <https://data.vlaanderen.be/id/concept/IntelligenteToegang-TypeVoorwaarde/d5c0c89a-3ba4-49fd-bfe4-f41405b4cbf1> }
+  VALUES ?regelVanDienstverlening { <http://data.lblod.info/id/dienstverlening/1/regel/4> }
+}
+```
+
+#### 5. Oplijsting van alle voorwaardes op basis van vorige stappen: welke bewijsstukken, duurtijd, tijdsvenster
+
+```
+prefix cpsv: <http://purl.org/vocab/cpsv#>
+prefix m8g: <http://data.europa.eu/m8g/>
+prefix mit: <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#>
+prefix dct: <http://purl.org/dc/terms/>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix iceg-ps: <http://vocab.belgif.be/ns/publicservice#>
+
+select ?regelVanDienstverlening ?voorwaardeVanRegel ?type ?beschrijving ?value ?opens ?closes ?bewijstypeclassificatietype
+where {
+  ?dienstverlening iceg-ps:hasRequirement/cpsv:hasRequirement ?regelVanDienstverlening .
+
+  ?regelVanDienstverlening cpsv:hasRequirement ?voorwaardeVanRegel .
+
+  ?voorwaardeVanRegel dct:type ?type ;
+                      dct:description ?beschrijving .
+
+  OPTIONAL {
+    ?voorwaardeVanRegel m8g:hasConcept/m8g:expressionOfExpectedValue ?value .
+
+    OPTIONAL {
+      ?value schema:opens ?opens ;
+             schema:closes ?closes .
+    }
+  }
+
+  OPTIONAL {
+    ?voorwaardeVanRegel m8g:hasEvidenceTypeList/m8g:specifiesEvidenceType/m8g:evidenceTypeClassification ?bewijstypeclassificatietype .
+  }
+
   VALUES ?regelVanDienstverlening { <http://data.lblod.info/id/dienstverlening/1/regel/4> }
 }
 ```
